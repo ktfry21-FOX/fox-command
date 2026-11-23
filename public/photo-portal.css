@@ -1,0 +1,974 @@
+/* ALFRED: integrated architectural interface v2.  Original ARC DOM, functions and storage remain intact. */
+#alfredRoom{--ar-bronze:#e6c396;--ar-ice:#72d9ec;--ar-ink:#e7f2f3;position:fixed;inset:0;z-index:70;isolation:isolate;overflow:hidden;font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ar-ink);background:#03090d url("./photo-command-room.webp") center center/cover no-repeat}
+#alfredRoom *{box-sizing:border-box}
+#alfredRoom::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(0,9,15,.54),transparent 76%),linear-gradient(0deg,rgba(0,9,15,.42),transparent 34%,rgba(0,0,0,.1));z-index:-1}
+#alfredRoom button:focus-visible,#alfredRoom input:focus-visible,#alfredRoom select:focus-visible{outline:2px solid var(--ar-bronze);outline-offset:2px}
+#alfredRoom .ar-upper{position:absolute;inset:0 0 auto;min-height:12%;padding:2.5vh 3vw 10px;display:flex;align-items:flex-start;justify-content:space-between;pointer-events:none;text-shadow:0 3px 16px #000}
+#alfredRoom .ar-brand{display:grid;gap:4px}
+#alfredRoom .ar-brand small{letter-spacing:.3em;font-size:9px;color:var(--ar-bronze);font-weight:700}
+#alfredRoom .ar-brand strong{font-weight:550;font-size:clamp(28px,3vw,53px);letter-spacing:.22em;line-height:1;color:#f0f2f1}
+#alfredRoom .ar-brand strong span{color:#ddbd88}
+#alfredRoom .ar-brand em{font-size:9px;letter-spacing:.24em;font-style:normal;color:#a4c4c9}
+#alfredRoom .ar-location{text-align:right;font-size:10px;letter-spacing:.16em;color:#e4c8a1;margin-top:4px}
+#alfredRoom .ar-photo-screen{position:absolute;left:3.1%;top:17.5%;width:68%;height:72%;z-index:3;display:flex;flex-direction:column;background:linear-gradient(115deg,rgba(1,14,23,.86),rgba(4,26,36,.69) 58%,rgba(1,17,25,.88)),repeating-linear-gradient(90deg,transparent 0 35px,#7caab504 36px 37px);backdrop-filter:blur(11px) saturate(1.12);-webkit-backdrop-filter:blur(11px) saturate(1.12);border:1px solid #a1c8cd7d;border-top:2px solid #dbd0bb85;border-radius:3px;box-shadow:inset 0 0 50px #51c2da0b,inset 0 1px #edf8ff5c,0 12px 44px #000b,0 0 32px #49bcd72a;overflow:hidden;clip-path:polygon(0 0,98.6% 0,100% 2%,100% 100%,1.5% 100%,0 97.3%)}
+#alfredRoom .ar-photo-screen::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:4;background:linear-gradient(155deg,#ffffff12,transparent 26% 68%,#52b6cc09);opacity:.6}
+#alfredRoom .ar-screenhead{z-index:5;display:flex;gap:12px;align-items:center;justify-content:space-between;padding:9px 14px;min-height:60px;flex:none;background:linear-gradient(90deg,#081923ec,#122d37bf 70%,#061a23e6);border-bottom:1px solid #6eafb36b}
+#alfredRoom .ar-screenhead .ar-signal{display:flex;align-items:center;gap:8px;color:#7ee5ee;font-size:9px;font-weight:800;letter-spacing:.18em}
+#alfredRoom .ar-signal::before{content:"";display:inline-block;width:6px;height:6px;background:#6fdbd1;border-radius:50%;box-shadow:0 0 12px #6fdbd1}
+#alfredRoom .ar-screenhead strong{display:block;margin:2px 0 0;font-size:clamp(13px,1.3vw,19px);font-weight:650;letter-spacing:.11em;color:#f4e2c8}
+#alfredRoom .ar-screen-actions{display:flex;gap:7px}
+#alfredRoom .ar-screen-actions button{border:1px solid #b99a705f;background:#292a26c7;color:#e2c69f;padding:9px 10px;min-height:37px;font-size:10px;font-weight:750;letter-spacing:.08em}
+#alfredRoom .ar-screen-actions button:hover{background:#564433cc}
+#alfredRoom .ar-worksurface{flex:1;min-height:0;position:relative;overflow:hidden}
+#alfredRoom .ar-module{position:absolute;inset:0;overflow:hidden;display:flex;min-height:0}
+#alfredRoom .ar-module .shell{min-height:100%;width:100%;display:flex;overflow:hidden;background:transparent}
+#alfredRoom .ar-module .shell aside{display:none!important}
+#alfredRoom .ar-module .shell main{flex:1;width:100%;max-width:100%;min-height:100%;height:100%;overflow:auto;overscroll-behavior:contain;padding:16px 21px 60px;background:transparent;scrollbar-color:#709ba0 #0a1f2b}
+#alfredRoom .ar-module .page{max-width:100%}
+#alfredRoom .ar-module .page>h1{font-size:clamp(21px,2.2vw,31px);letter-spacing:.06em;color:#ecf5f6}
+#alfredRoom .ar-module .card{background:linear-gradient(135deg,#0a2330bb,#0b202cc7);border:1px solid #47778776;border-radius:4px;box-shadow:inset 0 1px #c5e0e125,0 7px 20px #0004;margin:11px 0;padding:15px}
+#alfredRoom .ar-module .card h2{color:#a4e7f0}
+#alfredRoom .ar-module .hero{border-radius:4px;border-color:#5e99a389;background:linear-gradient(95deg,#092432ce,#102c3aaf)!important;box-shadow:inset 0 0 36px #0d8dad19;min-height:170px;padding:17px}
+#alfredRoom .ar-module .hero h1{font-size:clamp(24px,2.1vw,34px)}
+#alfredRoom .ar-module .reactor{width:100px;height:100px;max-width:100px;max-height:100px}
+#alfredRoom .ar-module .grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+#alfredRoom .ar-module .grid .card{margin:0;padding:12px}
+#alfredRoom .ar-module .metric{font-size:26px}
+#alfredRoom .ar-module .btn{border-radius:4px;background:#163c4cbf;border-color:#468aa3af;color:#dbedf0}
+#alfredRoom .ar-module .btn:hover{background:#275b6cc7}
+#alfredRoom .ar-module .btn.accent{background:#6c472bb9;border-color:#c49b64}
+#alfredRoom .ar-module input,#alfredRoom .ar-module textarea,#alfredRoom .ar-module select{border-radius:3px;background:#061a25db;border-color:#60909c;color:#f6fbfc}
+#alfredRoom .ar-module .person-tile,#alfredRoom .ar-module .task-card,#alfredRoom .ar-module .dossier-entry{border-radius:4px;background:#0d2a37d8}
+#alfredRoom .ar-module .shift-card{border-radius:4px}
+#alfredRoom .ar-module .tablewrap{background:#061e29a3}
+#alfredRoom .ar-module th{background:#183747ee}
+#alfredRoom .ar-module .cinematic-dossier-page .dossier-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#alfredRoom .ar-module .cinematic-dossier-page .dossier-entry{padding:13px}
+#alfredRoom .ar-module .cinematic-dossier-page .dossier-entry p{margin:4px 0}
+#alfredRoom .ar-screentail{min-height:24px;padding:6px 14px;flex:none;display:flex;gap:12px;justify-content:space-between;font-size:8px;letter-spacing:.14em;color:#9dc6ca;background:#07151dcf;border-top:1px solid #58848a5c}
+#alfredRoom .ar-wall{position:absolute;right:2.6%;top:28.6%;width:20.6%;height:19.3%;z-index:4;transform:perspective(900px) rotateY(-4deg);border:1px solid #66b2c09c;background:linear-gradient(135deg,#041a26d9,#09232de2);box-shadow:inset 0 0 29px #26afd41a,0 0 20px #29cbd334;display:flex;flex-direction:column;padding:10px;overflow:hidden}
+#alfredRoom .ar-wall .ar-label{font-size:9px;letter-spacing:.12em;color:#71cce1}
+#alfredRoom .ar-wall strong{font-size:clamp(12px,1.18vw,20px);letter-spacing:.13em;color:#e3f2f2;margin:8px 0}
+#alfredRoom .ar-wall .ar-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:2px}
+#alfredRoom .ar-wall button{border:1px solid #315565b9;background:#082b38a9;color:#cde8ec;font-size:10px;text-align:left;padding:8px 7px;min-width:0}
+#alfredRoom .ar-wall button span{font-size:clamp(16px,1.8vw,26px);color:#9ce8f0;display:block;font-weight:750}
+#alfredRoom .ar-wall button:nth-child(2) span{color:#d6e1e8}
+#alfredRoom .ar-wall button:hover{border-color:#ddb785}
+#alfredRoom .ar-wall .ar-tiny{font-size:8px;color:#c4a879;margin-top:auto;letter-spacing:.12em}
+#alfredRoom .ar-table{position:absolute;right:9.2%;bottom:18.8%;width:42%;height:14%;z-index:5;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:8px;background:linear-gradient(145deg,#041b24d9,#061722dd);border:1px solid #88c3c57c;box-shadow:inset 0 0 24px #00bacc15,0 2px 15px #000c;transform:perspective(850px) rotateX(19deg) rotate(-2deg) skewX(-6deg)}
+#alfredRoom .ar-table button{border:1px solid #5e9caa80;background:linear-gradient(180deg,#123947ce,#062330d6);color:#e2f3f4;line-height:1.05;font-size:clamp(8px,.83vw,13px);font-weight:720;text-align:left;letter-spacing:.06em;padding:8px 6px;min-width:0;min-height:0}
+#alfredRoom .ar-table button small{display:block;font-size:9px;font-weight:450;letter-spacing:.04em;margin-top:5px;color:#88c9d4}
+#alfredRoom .ar-table button.active,#alfredRoom .ar-table button:hover{border-color:#dcb77e;box-shadow:inset 0 0 9px #ddbb722a,0 0 10px #3bd0e35c;color:#ffe2b6}
+#alfredRoom .ar-table button.ar-shift2.active{border-color:#18d4eb}
+#alfredRoom .ar-table button.ar-shift4.active{border-color:#d4dce3}
+#alfredRoom .ar-bottom{position:absolute;bottom:2.5%;left:3%;font-size:9px;letter-spacing:.14em;color:#d4e6e9;text-shadow:0 2px 9px #000}
+#alfredRoom .ar-bottom strong{color:#e5bd87}
+#alfredRoom .ar-quickbar{position:absolute;left:3.1%;bottom:2%;z-index:6;display:flex;gap:5px;max-width:66%;overflow-x:auto;scrollbar-width:none}
+#alfredRoom .ar-quickbar button{border:1px solid #8ca9a15d;background:#06151acb;color:#dcebee;padding:8px 11px;letter-spacing:.08em;font-size:10px;white-space:nowrap;min-height:34px}
+#alfredRoom .ar-quickbar button:hover,#alfredRoom .ar-quickbar button.active{border-color:#d8b37d;color:#f2d7a8}
+#alfredRoom .ar-photo-screen.ar-collapsed{height:60px;top:17.5%;opacity:.98}
+#alfredRoom .ar-photo-screen.ar-collapsed .ar-worksurface,#alfredRoom .ar-photo-screen.ar-collapsed .ar-screentail{display:none}
+#alfredRoom.ar-focus .ar-photo-screen{width:90%;left:5%;top:10%;height:84%;background:linear-gradient(115deg,#071821f2,#071d26ef)}
+#alfredRoom.ar-focus .ar-wall,#alfredRoom.ar-focus .ar-table{opacity:.2;pointer-events:none}
+#alfredRoom.ar-focus .ar-quickbar{display:none}
+#alfredRoom.ar-focus .ar-module .cinematic-dossier-page .dossier-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+#alfredRoom .ar-photo-screen:not(.ar-collapsed) .ar-reopen{display:none}
+#alfredRoom .ar-photo-screen.ar-collapsed .ar-collapse{display:none}
+#alfredRoom .ar-photo-screen .ar-reopen{display:none}
+#alfredRoom .ar-photo-screen.ar-collapsed .ar-reopen{display:inline-block}
+#alfredRoom .ar-photo-screen.ar-collapsed .ar-location{display:none}
+#alfredRoom .ar-module .arc-status{z-index:99}
+#alfredRoom .ar-module .arc-profile-expectations .alfred-expectation-dossier{background:transparent}
+@media(max-width:1180px){#alfredRoom .ar-photo-screen{left:2.5%;width:72%;top:14%;height:75%}#alfredRoom .ar-wall{right:1%;width:22%;top:28%}#alfredRoom .ar-table{right:6%;width:48%;bottom:18%}#alfredRoom .ar-module .grid{grid-template-columns:repeat(2,minmax(0,1fr))}#alfredRoom .ar-module .reactor{display:none}#alfredRoom .ar-photo-screen .ar-screenhead strong{font-size:15px}}
+@media(max-width:800px){#alfredRoom{background-position:55% center}#alfredRoom .ar-upper{padding:16px}#alfredRoom .ar-brand strong{font-size:29px}#alfredRoom .ar-brand small,#alfredRoom .ar-brand em{font-size:8px}#alfredRoom .ar-location{font-size:8px}#alfredRoom .ar-photo-screen{top:18%;left:3%;width:94%;height:60%}#alfredRoom .ar-wall{top:8%;right:3%;height:10%;width:38%;transform:none;padding:6px}#alfredRoom .ar-wall .ar-stats{display:flex}#alfredRoom .ar-wall button{font-size:8px;padding:2px 6px}#alfredRoom .ar-wall button span{font-size:12px}#alfredRoom .ar-wall strong,#alfredRoom .ar-wall .ar-tiny{display:none}#alfredRoom .ar-table{bottom:6%;right:3%;width:94%;height:14%;transform:none;grid-template-columns:repeat(4,minmax(0,1fr));padding:4px}#alfredRoom .ar-table button{font-size:10px;padding:5px;min-height:36px}#alfredRoom .ar-table button small{display:none}#alfredRoom .ar-quickbar,#alfredRoom .ar-bottom{display:none}#alfredRoom .ar-screentail{font-size:7px}#alfredRoom.ar-focus .ar-photo-screen{left:2%;width:96%;top:9%;height:83%}#alfredRoom.ar-focus .ar-table{opacity:0}#alfredRoom .ar-module .shell main{padding:12px}#alfredRoom .ar-module .hero{padding:13px}}
+@media(max-width:520px){#alfredRoom .ar-upper{padding:8px 12px}#alfredRoom .ar-brand strong{font-size:23px}#alfredRoom .ar-brand em{display:none}#alfredRoom .ar-photo-screen{top:17%;height:61%}#alfredRoom .ar-photo-screen .ar-screenhead{min-height:48px;padding:7px}#alfredRoom .ar-screenhead strong{font-size:12px!important}#alfredRoom .ar-screen-actions button{font-size:8px;padding:5px;min-height:30px}#alfredRoom .ar-wall{top:9%;height:7%;width:51%;right:2%;padding:4px}#alfredRoom .ar-wall .ar-label{display:none}#alfredRoom .ar-table{bottom:1.5%;height:19%;right:2%;width:96%;gap:3px}#alfredRoom .ar-table button{font-size:8px;padding:5px 3px}#alfredRoom .ar-photo-screen.ar-collapsed{top:18%;height:50px}#alfredRoom .ar-module .grid{grid-template-columns:repeat(2,minmax(0,1fr))}#alfredRoom .ar-module .cinematic-dossier-page .dossier-grid{grid-template-columns:1fr}#alfredRoom.ar-focus .ar-module .cinematic-dossier-page .dossier-grid{grid-template-columns:1fr}#alfredRoom.ar-focus .ar-photo-screen{top:5%;height:88%}#alfredRoom .ar-module .task-board,#alfredRoom .ar-module .people-grid{grid-template-columns:1fr}#alfredRoom .ar-photo-screen .ar-screentail{display:none}}
+@media(prefers-reduced-motion:reduce){#alfredRoom *,#alfredRoom *::before,#alfredRoom *::after{animation:none!important;transition:none!important}}
+/* Final physical fit: keep the tabletop console outside the large left-wall display. */
+@media(min-width:801px){
+  #alfredRoom .ar-table{right:2.3%;bottom:13%;width:24.5%;height:29%;grid-template-columns:repeat(2,minmax(0,1fr));transform:perspective(900px) rotateX(12deg) rotate(-1deg) skewX(-3deg);gap:6px}
+  #alfredRoom .ar-table button{font-size:clamp(9px,.88vw,12px);padding:7px}
+  #alfredRoom .ar-table button small{font-size:8px;margin-top:4px}
+  #alfredRoom .ar-photo-screen.ar-collapsed ~ .ar-table{width:42%;right:9.2%;height:14%;bottom:18.8%;grid-template-columns:repeat(4,minmax(0,1fr));transform:perspective(850px) rotateX(19deg) rotate(-2deg) skewX(-6deg)}
+}
+#alfredRoom.ar-focus .ar-table,#alfredRoom.ar-focus .ar-wall{opacity:0!important;pointer-events:none}
+#alfredRoom .ar-module .hero{min-height:0;padding:17px!important;border-color:#558b936b!important;box-shadow:inset 0 0 28px #188eab10!important;background:linear-gradient(100deg,#082331e3,#0c2532aa)!important}
+#alfredRoom .ar-module .hero .reactor{width:80px;height:80px;border-width:2px;opacity:.7}
+#alfredRoom .ar-module .hero .status-tray{margin:9px 0}
+#alfredRoom .ar-module .cinematic-dossier-page .cinematic-page-head{padding:18px 23px!important;margin-bottom:10px!important;min-height:0!important;border-radius:4px!important;background-image:linear-gradient(95deg,#06141bea,#0e2732d9)!important}
+#alfredRoom .ar-module .cinematic-dossier-page .cinematic-page-head h1{font-size:clamp(23px,2.7vw,34px)!important;margin:11px 0 2px}
+#alfredRoom .ar-module .cinematic-dossier-page .cinematic-page-head p{font-size:13px;margin:6px 0}
+#alfredRoom .ar-module .cinematic-dossier-page .arc-profile-expectations{padding:14px 17px!important}
+#alfredRoom .ar-module .cinematic-dossier-page .dossier-heading{margin-bottom:10px}
+#alfredRoom.ar-focus .ar-module .cinematic-dossier-page .dossier-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:700px){#alfredRoom.ar-focus .ar-module .cinematic-dossier-page .dossier-grid{grid-template-columns:1fr}}
+/* Integrate the overview into a single instrument panel, rather than stacking a second decorative dashboard. */
+#alfredRoom .ar-module #home .hero .status-tray,#alfredRoom .ar-module #home .hero .reactor,#alfredRoom .ar-module #home .hero .storm-orb-layer,#alfredRoom .ar-module #home .hero .home-sweep{display:none!important}
+#alfredRoom .ar-module #home .hero{min-height:0!important;padding:14px 17px!important}
+#alfredRoom .ar-module #home .hero h1{font-size:clamp(23px,2vw,29px);line-height:1.06}
+#alfredRoom .ar-module #home .hero p{margin:7px 0;color:#bfd8dd}
+#alfredRoom .ar-module #home .hero .row{margin-top:9px;gap:7px}
+#alfredRoom .ar-module #home .hero .btn{font-size:12px;padding:8px 12px;min-height:36px}
+#alfredRoom .ar-module #home .hero .eyebrow{margin-bottom:7px}
+#alfredRoom .ar-module #home .hero .home-date{margin-top:4px}
+
+/* V4 — Architectural controls, search lens and photographic material refinements. */
+#alfredRoom{--ar-bronze:#e6c396;--ar-edge:rgba(117,183,190,.60)}
+#alfredRoom .ar-photo-screen{
+ background:linear-gradient(116deg,rgba(2,13,20,.91),rgba(5,25,34,.80) 60%,rgba(0,15,22,.91)),
+ linear-gradient(0deg,rgba(191,221,224,.02) 1px,transparent 1px);
+ background-size:auto,100% 5px;
+ box-shadow:inset 0 0 0 5px #0009,inset 0 0 0 6px #91d0d227,inset 0 30px 50px #0003,
+  0 14px 38px #000d,0 0 32px #25c5d52a;
+ border:1px solid #7a9b98c2;
+ border-top:3px solid #c2c3adad;
+}
+#alfredRoom .ar-photo-screen::before{content:"";position:absolute;inset:8px;z-index:0;pointer-events:none;border:1px solid #7daeb522;
+ background:linear-gradient(137deg,#fff2,transparent 16% 84%,#c8f4ff07);}
+#alfredRoom .ar-photo-screen::after{background:linear-gradient(160deg,#ffffff19,transparent 13% 79%,#e3f1e409);opacity:.7}
+#alfredRoom .ar-screenhead{position:relative;background:linear-gradient(90deg,#071821fa 0%,#0a242df7 75%,#091821f7 100%);min-height:65px;box-shadow:inset 0 1px #ddc6a85c;}
+#alfredRoom .ar-screenhead:after{content:"";position:absolute;bottom:0;left:0;width:48%;height:1px;background:linear-gradient(90deg,#d6b17f,#5de0df,transparent);pointer-events:none}
+#alfredRoom .ar-heading{min-width:0}
+#alfredRoom .ar-screen-actions{flex-wrap:wrap;justify-content:flex-end}
+#alfredRoom .ar-screen-actions button{font-size:9px;min-height:32px;white-space:nowrap;transition:background .18s ease,border-color .18s ease,box-shadow .18s ease;cursor:pointer}
+#alfredRoom #arFind{background:linear-gradient(145deg,#235562,#0b303f);color:#dcf5f8;border-color:#569ca5}
+#alfredRoom #arFind:hover{box-shadow:0 0 18px #35d8f35e}
+#alfredRoom #arDossier{background:#5a4028;color:#fff0d8}
+#alfredRoom .ar-worksurface{background:radial-gradient(ellipse at 78% 0%,#3fdcf108,transparent 42%)}
+#alfredRoom .ar-wall{border:4px solid #111d22;border-top-color:#6b7d82;border-left-color:#61787e;
+ border-radius:2px;padding:8px;
+ box-shadow:inset 0 0 0 1px #6bdaf45d,inset 0 0 38px #2fced91a,0 9px 26px #000b,0 0 25px #35cde13d;
+ background:linear-gradient(155deg,#061721ee,#082936e6)}
+#alfredRoom .ar-wall::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,#e6feff17,transparent 23% 76%,#37a7ca10)}
+#alfredRoom .ar-wall-lower{display:flex;gap:7px;align-items:center;margin-top:auto}
+#alfredRoom .ar-wall-pulse{flex:none;width:6px;height:6px;border-radius:50%;background:#7ae5d7;box-shadow:0 0 14px #5af7db}
+#alfredRoom .ar-table{border:4px ridge #708a88;border-radius:4px;
+ background:linear-gradient(110deg,#162a30f0,#071b21f2);
+ box-shadow:inset 0 0 0 1px #6fd9e78c,inset 0 11px 25px #ffffff09,0 4px 23px #000c,0 0 19px #1c96a145}
+#alfredRoom .ar-table::before{content:"";position:absolute;inset:3px;pointer-events:none;background:linear-gradient(125deg,#fff2,transparent 33% 77%,#18b8c515);opacity:.35}
+#alfredRoom .ar-table button{position:relative;border-radius:2px;background:linear-gradient(155deg,#153746f0,#082331f0);cursor:pointer;
+ box-shadow:inset 0 1px #9fcbd33c,0 1px 4px #0007;transition:border-color .2s,box-shadow .2s,background .2s,transform .2s}
+#alfredRoom .ar-table button:active{transform:translateY(1px)}
+#alfredRoom .ar-table button:hover{background:linear-gradient(150deg,#21526af7,#0e3541f5)}
+#alfredRoom .ar-quickbar button{background:#07191fe8;border-color:#bdb19b78}
+#alfredRoom .ar-module .btn.accent{color:#ffe8c9!important;background:linear-gradient(135deg,#6b4c32,#3e2a1d)!important;text-shadow:0 1px 1px #0009;border:1px solid #c9a274!important;box-shadow:inset 0 1px #f5dcb578}
+#alfredRoom .ar-module .btn.accent:hover{color:white!important;background:#755233!important}
+#alfredRoom .ar-finder[hidden],#alfredRoom .ar-screen-actions button[hidden]{display:none!important}
+#alfredRoom .ar-finder{position:absolute;z-index:25;left:14px;top:76px;width:min(550px,calc(100% - 28px));
+ padding:15px;border:1px solid #b5c3b093;border-top:3px solid #d7b483;background:linear-gradient(145deg,#06151dfb,#092a35fa);
+ box-shadow:0 18px 45px #000e,inset 0 0 0 1px #60c0cf38;backdrop-filter:blur(20px)}
+#alfredRoom .ar-finder-heading{display:flex;align-items:center;justify-content:space-between;color:#e2be87;font-size:10px;letter-spacing:.18em;font-weight:800}
+#alfredRoom #arFindClose{font-size:24px;color:#daeaf0;border:0;background:transparent;min-width:36px;min-height:36px;cursor:pointer}
+#alfredRoom .ar-search-label{display:block;font-size:11px;color:#afd5d8;margin:9px 0 6px}
+#alfredRoom #arSearch{display:block;width:100%;border:1px solid #76b8c1;border-radius:2px;background:#05141bf5;color:white;padding:13px 12px;font-size:14px;box-shadow:inset 0 2px 6px #0008;outline-offset:3px}
+#alfredRoom .ar-finder-results{max-height:min(310px,44vh);overflow-y:auto;display:grid;gap:4px;padding:10px 0 0}
+#alfredRoom .ar-finder-result{width:100%;display:flex;align-items:center;gap:12px;text-align:left;background:#0c2b36;border:1px solid #345d66;color:#e8f5f6;padding:9px 12px;cursor:pointer}
+#alfredRoom .ar-finder-result:hover,#alfredRoom .ar-finder-result:focus-visible{background:#164452;border-color:#d7ad78}
+#alfredRoom .ar-result-code{font-family:monospace;color:#cead7f;font-size:12px}
+#alfredRoom .ar-result-detail{flex:1;min-width:0;display:grid;gap:2px}
+#alfredRoom .ar-result-detail strong{font-size:13px;color:#f4fafa;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#alfredRoom .ar-result-detail small{font-size:9px;letter-spacing:.1em;color:#8eb5c5}
+#alfredRoom .ar-find-foot{margin:10px 0 0;color:#94acb1;font-size:8px;letter-spacing:.08em}
+#alfredRoom .ar-no-results{padding:12px;color:#ccd4d6;font-size:12px}
+@media(max-width:900px){#alfredRoom .ar-screen-actions button{padding:6px;font-size:8px}#alfredRoom .ar-screenhead{padding:7px 9px}}
+@media(max-width:800px){#alfredRoom .ar-wall .ar-wall-lower{display:none}#alfredRoom .ar-screenhead .ar-heading strong{letter-spacing:.04em}#alfredRoom .ar-finder{top:60px}#alfredRoom .ar-worksurface{min-height:0}}
+@media(max-width:520px){#alfredRoom .ar-screen-actions{gap:3px}#alfredRoom .ar-screen-actions button{padding:5px;font-size:8px;min-height:28px}#alfredRoom #arDossier{max-width:82px;white-space:normal;text-align:center}#alfredRoom .ar-screenhead .ar-signal{font-size:7px}#alfredRoom .ar-finder{left:5px;top:53px;width:calc(100% - 10px);padding:10px}#alfredRoom .ar-wall{display:none}#alfredRoom .ar-photo-screen{top:12%;height:66%}#alfredRoom .ar-table{bottom:1%;height:20%}}
+
+/* Native room-first state on large screens: reveal the photographic architecture. */
+#alfredRoom .ar-ambient{display:none}
+@media(min-width:1100px){
+  #alfredRoom .ar-photo-screen.ar-collapsed{display:none!important}
+  #alfredRoom:has(.ar-photo-screen.ar-collapsed) .ar-ambient{display:grid;gap:9px;position:absolute;z-index:5;
+    left:3.2%;bottom:16.5%;padding:18px 22px;width:min(425px,36vw);border:1px solid #abc5bf7b;
+    border-left:3px solid #dcbd88;text-align:left;color:#e9f2f1;
+    background:linear-gradient(100deg,#06151ce8,#0c2630c5 75%,#10353c91);backdrop-filter:blur(9px);
+    box-shadow:inset 0 1px #b5dae255,0 14px 35px #0008;cursor:pointer;
+    transition:transform .2s ease,box-shadow .2s ease}
+  #alfredRoom .ar-ambient:hover{transform:translateY(-2px);box-shadow:0 12px 28px #000a,0 0 24px #4ad3e936}
+  #alfredRoom .ar-ambient-eyebrow{font-size:9px;letter-spacing:.19em;color:#95e4eb}
+  #alfredRoom .ar-ambient strong{font-size:clamp(18px,2vw,26px);font-weight:650;letter-spacing:.1em;color:#ffe5b8}
+  #alfredRoom .ar-ambient strong span{color:#66daea}
+  #alfredRoom .ar-ambient small{font-size:9px;letter-spacing:.08em;color:#c2d2d6}
+  #alfredRoom .ar-photo-screen.ar-collapsed ~ .ar-table{right:2.3%;bottom:13%;width:24.5%;height:29%;grid-template-columns:repeat(2,minmax(0,1fr));transform:perspective(900px) rotateX(12deg) rotate(-1deg) skewX(-3deg)}
+  #alfredRoom:has(.ar-photo-screen.ar-collapsed) .ar-quickbar{display:none}
+  #alfredRoom:has(.ar-photo-screen.ar-collapsed) .ar-bottom{bottom:2%;left:3.2%}
+  #alfredRoom .ar-wall{right:2.6%;top:28.6%}
+}
+
+
+/* ALFRED V5: opaque neutral-gray instruments + squared, equal-size control grid */
+#alfredRoom {
+ --ar-gray-0:#131519;--ar-gray-1:#202327;--ar-gray-2:#282b30;
+ --ar-gray-edge:#576068;--ar-shift-two:#41d6ee;--ar-shift-four:#d4dde4;
+}
+#alfredRoom .ar-photo-screen {
+ background:linear-gradient(117deg,rgba(27,29,33,.98),rgba(32,34,39,.97) 60%,rgba(21,23,27,.99))!important;
+ border:2px solid #67737b!important;
+ border-radius:7px!important;
+ box-shadow:inset 0 0 0 4px #0c0e10,inset 0 1px 0 #b0b8b43d,0 15px 38px #000d!important;
+}
+#alfredRoom .ar-photo-screen::before {background:linear-gradient(160deg,#ffffff08,transparent 19%)!important}
+#alfredRoom .ar-photo-screen::after{opacity:.2!important}
+#alfredRoom .ar-screenhead {
+ background:linear-gradient(100deg,#292c30,#202327 75%,#26292d)!important;
+ border-bottom:1px solid #656c72!important;
+}
+#alfredRoom .ar-worksurface{background:#191b1fe8!important}
+#alfredRoom .ar-module .shell main{background:transparent!important}
+#alfredRoom .ar-module .card,
+#alfredRoom .ar-module .item,
+#alfredRoom .ar-module .check,
+#alfredRoom .ar-module .history-row,
+#alfredRoom .ar-module .task-card,
+#alfredRoom .ar-module .person-tile,
+#alfredRoom .ar-module .dossier-entry,
+#alfredRoom .ar-module .arc-profile-expectations,
+#alfredRoom .ar-module .neon-panel,
+#alfredRoom .ar-module #home .hero,
+#alfredRoom .ar-module .hero,
+#alfredRoom .ar-module .shift-card {
+ background:linear-gradient(155deg,#2b2e32,#222529 78%,#282b30)!important;
+ background-image:linear-gradient(155deg,#2b2e32,#222529 78%,#282b30)!important;
+ border:1px solid #5b646b!important;
+ border-radius:6px!important;
+ box-shadow:inset 0 1px 0 #ffffff13,0 5px 13px #0005!important;
+}
+#alfredRoom .ar-module .hero::before{opacity:.12!important}
+#alfredRoom .ar-module .card h2{color:#dce6eb!important}
+#alfredRoom .ar-module .tablewrap{background:#23262b!important;border:1px solid #4e555d;border-radius:5px}
+#alfredRoom .ar-module th{background:#363a40!important;color:#d3e1e7!important}
+#alfredRoom .ar-module td{background:#24272c!important;border-bottom-color:#495159!important}
+#alfredRoom .ar-module .grid>.card{min-width:0}
+#alfredRoom .ar-module input,
+#alfredRoom .ar-module select,
+#alfredRoom .ar-module textarea{
+ background:#16191df9!important;border-color:#69747a!important;
+}
+#alfredRoom .ar-module .btn:not(.accent){background:#353b40!important;border-color:#6c767d!important;color:#eaf0f3!important}
+#alfredRoom .ar-module .btn.accent{background:#51432f!important}
+#alfredRoom .ar-wall{
+ transform:none!important;
+ background:linear-gradient(150deg,#272b30,#1d2025)!important;
+ border:3px solid #757f85!important;border-radius:7px!important;
+ box-shadow:inset 0 0 0 1px #d5dddd18,0 11px 26px #000b!important;
+}
+#alfredRoom .ar-wall button{background:#32363b!important;border-color:#555e66!important;border-radius:4px!important}
+#alfredRoom .ar-wall button[data-al-page='shift2']{
+ border-left:3px solid var(--ar-shift-two)!important;color:#a0edfa!important;
+}
+#alfredRoom .ar-wall button[data-al-page='shift4']{
+ border-left:3px solid var(--ar-shift-four)!important;color:#dce3e9!important;
+}
+#alfredRoom .ar-wall button[data-al-page='shift2'] span{color:#4bdff2!important}
+#alfredRoom .ar-wall button[data-al-page='shift4'] span{color:#d4dde4!important}
+#alfredRoom .ar-table,
+#alfredRoom .ar-photo-screen.ar-collapsed ~ .ar-table {
+ right:2.3%!important;bottom:12.8%!important;width:24.5%!important;height:29%!important;
+ transform:none!important;clip-path:none!important;
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ grid-template-rows:repeat(4,minmax(0,1fr))!important;
+ gap:6px!important;padding:8px!important;
+ border:3px solid #788188!important;border-radius:7px!important;
+ background:linear-gradient(165deg,#282b30,#1f2226)!important;
+ box-shadow:inset 0 1px 0 #d8dedd21,0 10px 26px #000d!important;
+}
+#alfredRoom .ar-table::before{opacity:0!important}
+#alfredRoom .ar-table button{
+ min-width:0!important;min-height:0!important;box-sizing:border-box!important;
+ width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+ border:1px solid #616b72!important;border-radius:4px!important;
+ background:#34383e!important;color:#e6eaec!important;
+ box-shadow:inset 0 1px #e6eff21a!important;
+ transform:none!important;
+ padding:6px 8px!important;
+ font-size:clamp(9px,.81vw,12px)!important;
+}
+#alfredRoom .ar-table button small{font-size:clamp(7px,.57vw,9px)!important;color:#aab8c0!important}
+#alfredRoom .ar-table button:hover,#alfredRoom .ar-table button.active:not(.ar-shift2):not(.ar-shift4){
+ background:#464a50!important;border-color:#d5b589!important;color:#f9e2c1!important;
+}
+#alfredRoom .ar-table button.ar-shift2{
+ border-left:4px solid var(--ar-shift-two)!important;
+ color:#79e5f5!important;background:#293b43!important;
+}
+#alfredRoom .ar-table button.ar-shift2 small{color:#9beafa!important}
+#alfredRoom .ar-table button.ar-shift4{
+ border-left:4px solid var(--ar-shift-four)!important;
+ color:#e1e8ec!important;background:#383d43!important;
+}
+#alfredRoom .ar-table button.ar-shift4 small{color:#c8d2d8!important}
+#alfredRoom .ar-table button.ar-shift2.active{background:#205263!important;border-color:#4cd8ec!important}
+#alfredRoom .ar-table button.ar-shift4.active{background:#5b636b!important;border-color:#d9e0e7!important}
+#alfredRoom .ar-module .shift-card.s2,
+#alfredRoom .ar-module #shift2 .card,
+#alfredRoom .ar-module .person-tile.glow-two {
+ background:linear-gradient(145deg,#2b3136,#22262a)!important;
+ border-color:#32cbe5!important;
+ box-shadow:inset 4px 0 #32cbe5,0 5px 14px #0004!important;
+}
+#alfredRoom .ar-module .shift-card.s4,
+#alfredRoom .ar-module #shift4 .card,
+#alfredRoom .ar-module .person-tile.glow-four {
+ background:linear-gradient(145deg,#34373b,#25282c)!important;
+ border-color:#b6c3cd!important;
+ box-shadow:inset 4px 0 #bcc8d1,0 5px 14px #0004!important;
+}
+#alfredRoom .ar-module .shift-card.s2 strong,#alfredRoom .ar-module #shift2 h1,#alfredRoom .ar-module #shift2 h2{color:#70def1!important}
+#alfredRoom .ar-module .shift-card.s4 strong,#alfredRoom .ar-module #shift4 h1,#alfredRoom .ar-module #shift4 h2{color:#d7e0e7!important}
+#alfredRoom .ar-module .arc-shift-heading.shift-2 th{background:#25404b!important;color:#7be4f4!important;border-top:2px solid #33cde8!important}
+#alfredRoom .ar-module .arc-shift-heading.shift-4 th{background:#41464d!important;color:#e2e9ee!important;border-top:2px solid #b8c5ce!important}
+#alfredRoom .ar-module .arc-tech-row.glow-two td:first-child{border-left:4px solid #2fc8e4!important}
+#alfredRoom .ar-module .arc-tech-row.glow-four td:first-child{border-left:4px solid #bbc8d1!important}
+#alfredRoom .ar-module .cinematic-dossier-page .cinematic-page-head{
+ background:#2a2d32!important;
+ background-image:linear-gradient(120deg,#30343a,#22252a)!important;
+ border-color:#717a81!important;
+ box-shadow:inset 0 1px #ffffff16,0 5px 15px #0006!important;
+}
+#alfredRoom .ar-module .alfred-goal-progress{
+ background:#33373d!important;
+ background-image:none!important;
+ border:1px solid #626d74!important;
+ box-shadow:inset 0 1px #ffffff0c!important;
+}
+#alfredRoom .ar-module .alfred-goal-track{background:#1b2025!important;border-color:#59636a!important}
+#alfredRoom .ar-module .dossier-entry.is-selected{background:#46413a!important;border-color:#d6b587!important}
+#alfredRoom .ar-ambient{background:#24282df6!important;border:1px solid #88959d!important;border-left:3px solid #dcb889!important;border-radius:7px!important}
+#alfredRoom .ar-screentail{background:#26292dfa!important}
+#alfredRoom .ar-finder{background:#252a2ffb!important}
+#alfredRoom .ar-finder-result{background:#31363b!important}
+@media(max-width:1099px){
+ #alfredRoom .ar-table,#alfredRoom .ar-photo-screen.ar-collapsed ~ .ar-table{
+  right:3%!important;bottom:3%!important;width:94%!important;height:17%!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  grid-template-rows:repeat(2,minmax(0,1fr))!important;
+  transform:none!important;
+ }
+}
+@media(max-width:800px){
+ #alfredRoom .ar-photo-screen{height:60%!important}
+ #alfredRoom .ar-table button{font-size:clamp(9px,1.5vw,12px)!important}
+ #alfredRoom .ar-table button small{font-size:8px!important}
+}
+@media(max-width:520px){
+ #alfredRoom .ar-photo-screen{top:12%!important;height:64%!important}
+ #alfredRoom .ar-table,#alfredRoom .ar-photo-screen.ar-collapsed ~ .ar-table{
+  right:2%!important;bottom:1.5%!important;width:96%!important;height:20%!important;
+  gap:3px!important;padding:4px!important;
+ }
+ #alfredRoom .ar-table button{font-size:8px!important;padding:4px!important}
+ #alfredRoom .ar-table button small{display:none!important}
+}
+@media(prefers-reduced-transparency:reduce){
+ #alfredRoom .ar-photo-screen{background:#22252a!important}
+ #alfredRoom .ar-module .card,#alfredRoom .ar-module .item,#alfredRoom .ar-module .dossier-entry{background:#282b30!important}
+}
+
+/* FOX: avoid redundant navigation and keep balanced dark-gray control surfaces. */
+#alfredRoom .ar-quickbar{display:none!important}
+#alfredRoom .ar-wall .ar-shift-readout{font-size:10px;color:#e0edf3;border:1px solid #53616c;padding:4px 8px;min-height:34px;background:#252a30;display:flex;justify-content:space-between;align-items:center;gap:5px}
+#alfredRoom .ar-wall .ar-shift-readout span{font-size:10px;font-weight:650}
+#alfredRoom .ar-wall .ar-shift-readout.ar-shift2{border-color:#1399b8;color:#67def3}
+#alfredRoom .ar-wall .ar-shift-readout.ar-shift4{border-color:#8a969e;color:#dbe4ec}
+#alfredRoom .ar-module .cinematic-launch-dossier{display:none!important}
+#alfredRoom .fox-choice-wrapper{position:relative;display:block;width:100%;min-width:0}
+#alfredRoom .fox-native-select{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;padding:0!important;margin:0!important;border:0!important}
+#alfredRoom .fox-choice-trigger{display:block;width:100%;min-height:42px;text-align:left;padding:10px 33px 10px 12px;background:#292d32!important;color:#e9f1f5!important;border:1px solid #7a8791!important;border-radius:5px!important;position:relative;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#alfredRoom .fox-choice-trigger:after{content:'⌕';position:absolute;right:9px;color:#8fdef1;font-weight:800}
+#alfredRoom .fox-choice-trigger:focus-visible{outline:2px solid #53def5;outline-offset:2px}
+#alfredRoom .fox-choice-popup[hidden]{display:none!important}
+#alfredRoom .fox-choice-popup{position:fixed;z-index:10002;max-height:min(390px,65vh);display:flex;flex-direction:column;gap:9px;padding:12px;border:1px solid #8999a4;border-top:2px solid #6dd7e5;border-radius:7px;background:#25292ff8!important;box-shadow:0 15px 45px #000e;backdrop-filter:blur(14px)}
+#alfredRoom .fox-choice-top{display:flex;justify-content:space-between;align-items:center;color:#d1e8f2;letter-spacing:.09em;font-size:11px;font-weight:700}
+#alfredRoom #foxChoiceClose{background:#343941;color:white;border:1px solid #697884;border-radius:4px;min-width:36px;min-height:36px;font-size:21px}
+#alfredRoom #foxChoiceSearch{width:100%;min-height:44px;font-size:16px;background:#151a20;color:#fff;border:1px solid #90aab4;border-radius:5px;padding:9px 12px}
+#alfredRoom .fox-choice-results{min-height:30px;overflow-y:auto;display:flex;flex-direction:column;gap:4px}
+#alfredRoom .fox-choice-option{flex:none;min-height:39px;text-align:left;padding:9px 11px;background:#30363d;color:#eef7fa;border:1px solid #505d66;border-radius:4px;cursor:pointer}
+#alfredRoom .fox-choice-option:hover,#alfredRoom .fox-choice-option:focus-visible,#alfredRoom .fox-choice-option[aria-selected="true"]{border-color:#57d7ec;background:#24404b}
+#alfredRoom .fox-no-choice{padding:8px 6px;color:#acb7c2;font-size:12px}
+@media(max-width:520px){#alfredRoom .fox-choice-popup{max-height:48vh;padding:9px}#alfredRoom .fox-choice-trigger{min-height:44px}#alfredRoom .ar-wall .ar-shift-readout{font-size:8px;min-height:25px}}
+/* FOX: compact non-interactive live wall readouts; prevent Shift 2/4 labels from colliding. */
+#alfredRoom .ar-wall .ar-stats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:5px!important}
+#alfredRoom .ar-wall .ar-shift-readout{min-width:0;min-height:45px;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;gap:1px!important;text-align:center!important;font-size:9px!important;padding:5px 3px!important}
+#alfredRoom .ar-wall .ar-shift-readout span{font-size:9px!important;white-space:nowrap}
+@media(max-width:800px){#alfredRoom .ar-wall .ar-shift-readout{min-height:33px;font-size:8px!important}#alfredRoom .ar-wall .ar-shift-readout span{font-size:8px!important}}
+
+/* FOX v2: room hardware should visually match cool metal / photo */
+#alfredRoom{--ar-bronze:#b7c9d0;--ar-ice:#59d9ed;--ar-ink:#edf3f6}
+#alfredRoom .ar-upper .ar-brand strong,#alfredRoom .ar-ambient strong{color:#edf6fb!important}
+#alfredRoom .ar-table{background:linear-gradient(145deg,#2b3036,#1c2228)!important;border-color:#758a91!important;box-shadow:0 6px 21px #000c,inset 0 1px #dcf6ff23!important}
+#alfredRoom .ar-table button{background:linear-gradient(135deg,#343b42,#252c33)!important;border-color:#62747c!important;color:#e1ecf1!important}
+#alfredRoom .ar-table button:hover{border-color:#66cde2!important;background:linear-gradient(135deg,#394c55,#293d49)!important}
+#alfredRoom .ar-ambient{border-left-color:#6ed6e9!important;background:#1b2128ee!important}
+#alfredRoom .ar-wall{background:#20262dee!important}
+#alfredRoom .ar-photo-screen{border-color:#748891!important}
+
+/* FOX FINAL — right-side command rail, true room-only mode, and reliable page scrolling. */
+#alfredRoom{
+  --fox-rail-width:28%;
+  --fox-shift-two:#32d4ec;
+  --fox-shift-four:#d2dbe2;
+}
+#alfredRoom .ar-ambient,
+#alfredRoom .ar-bottom,
+#alfredRoom .ar-reopen,
+#alfredRoom .ar-quickbar{display:none!important}
+
+/* The work display occupies the left side. The command boxes stay on the right. */
+#alfredRoom .ar-photo-screen,
+#alfredRoom .ar-photo-screen.ar-collapsed{
+  display:flex!important;
+  left:2.2%!important;
+  top:9.5%!important;
+  width:66.5%!important;
+  height:86%!important;
+  opacity:1!important;
+  clip-path:none!important;
+  border-radius:7px!important;
+}
+#alfredRoom .ar-photo-screen.ar-collapsed .ar-worksurface,
+#alfredRoom .ar-photo-screen.ar-collapsed .ar-screentail{display:flex!important}
+#alfredRoom .ar-photo-screen.ar-collapsed .ar-screentail{display:flex!important}
+#alfredRoom .ar-wall{
+  right:2.2%!important;
+  top:8.5%!important;
+  width:var(--fox-rail-width)!important;
+  height:13.5%!important;
+  transform:none!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+}
+#alfredRoom .ar-table,
+#alfredRoom .ar-photo-screen.ar-collapsed ~ .ar-table{
+  position:absolute!important;
+  right:2.2%!important;
+  left:auto!important;
+  top:24%!important;
+  bottom:auto!important;
+  width:var(--fox-rail-width)!important;
+  height:70.5%!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-template-rows:repeat(3,minmax(0,1fr))!important;
+  gap:7px!important;
+  padding:9px!important;
+  overflow:hidden!important;
+  transform:none!important;
+  clip-path:none!important;
+  border:3px solid #778188!important;
+  border-radius:8px!important;
+  background:linear-gradient(155deg,rgba(42,46,51,.98),rgba(27,30,34,.99))!important;
+  box-shadow:inset 0 1px 0 #f2f7f719,0 15px 38px #000d!important;
+}
+#alfredRoom .ar-table button{
+  width:100%!important;
+  height:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  padding:8px 7px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+  background:linear-gradient(145deg,#3a3f45,#292d32)!important;
+  border:1px solid #69747c!important;
+  border-radius:5px!important;
+  color:#edf2f4!important;
+  font-size:clamp(8px,.72vw,11px)!important;
+  line-height:1.08!important;
+  letter-spacing:.045em!important;
+  box-shadow:inset 0 1px #ffffff16,0 3px 8px #0006!important;
+  transform:none!important;
+}
+#alfredRoom .ar-table button small{
+  display:block!important;
+  margin-top:5px!important;
+  font-size:clamp(6px,.52vw,8px)!important;
+  line-height:1.15!important;
+  color:#aebbc2!important;
+  white-space:normal!important;
+}
+#alfredRoom .ar-table button:hover,
+#alfredRoom .ar-table button:focus-visible,
+#alfredRoom .ar-table button.active:not(.ar-shift2):not(.ar-shift4){
+  background:linear-gradient(145deg,#4a5056,#353a40)!important;
+  border-color:#d2b182!important;
+  color:#ffe8c5!important;
+}
+#alfredRoom .ar-table button.ar-shift2{
+  background:linear-gradient(145deg,#24404a,#24343a)!important;
+  border-color:#2abfd8!important;
+  box-shadow:inset 4px 0 var(--fox-shift-two),0 3px 8px #0006!important;
+  color:#8eeafa!important;
+}
+#alfredRoom .ar-table button.ar-shift2 small{color:#9beaf7!important}
+#alfredRoom .ar-table button.ar-shift4{
+  background:linear-gradient(145deg,#444a50,#33383d)!important;
+  border-color:#aebac3!important;
+  box-shadow:inset 4px 0 var(--fox-shift-four),0 3px 8px #0006!important;
+  color:#edf3f6!important;
+}
+#alfredRoom .ar-table button.ar-shift4 small{color:#d0d9df!important}
+#alfredRoom .ar-table button.ar-shift2.active{background:#235767!important;border-color:#58dcef!important}
+#alfredRoom .ar-table button.ar-shift4.active{background:#606970!important;border-color:#e1e8ed!important}
+
+/* ROOM VIEW: only the photograph, status monitor, and right-side command boxes. */
+#alfredRoom.ar-room-only .ar-photo-screen{display:none!important}
+#alfredRoom.ar-room-only .ar-wall,
+#alfredRoom.ar-room-only .ar-table{opacity:1!important;pointer-events:auto!important}
+#alfredRoom.ar-room-only .ar-upper{opacity:1}
+
+/* Expanded work mode fills the room and temporarily hides the command rail. */
+#alfredRoom.ar-focus .ar-photo-screen{
+  display:flex!important;
+  left:2%!important;
+  top:4.5%!important;
+  width:96%!important;
+  height:91%!important;
+}
+#alfredRoom.ar-focus .ar-wall,
+#alfredRoom.ar-focus .ar-table{display:none!important}
+
+/* Critical scroll fix: one deliberate vertical scroller inside the fixed room. */
+#alfredRoom .ar-worksurface{
+  min-height:0!important;
+  height:100%!important;
+  overflow:hidden!important;
+}
+#alfredRoom .ar-module{
+  position:absolute!important;
+  inset:0!important;
+  min-height:0!important;
+  height:100%!important;
+  overflow:hidden!important;
+  display:block!important;
+}
+#alfredRoom .ar-module .shell{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:0!important;
+  overflow:hidden!important;
+}
+#alfredRoom .ar-module .shell main{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  height:auto!important;
+  min-height:0!important;
+  overflow-x:hidden!important;
+  overflow-y:scroll!important;
+  -webkit-overflow-scrolling:touch!important;
+  touch-action:pan-y!important;
+  overscroll-behavior-y:contain!important;
+  scrollbar-gutter:stable!important;
+  padding:16px 20px calc(96px + env(safe-area-inset-bottom))!important;
+}
+#alfredRoom .ar-module .page{height:auto!important;min-height:0!important;overflow:visible!important}
+#alfredRoom .ar-module .page.active{display:block!important}
+#alfredRoom .ar-module .tablewrap{
+  overflow-x:auto!important;
+  overflow-y:visible!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+#alfredRoom .ar-module .shell main::-webkit-scrollbar{width:11px}
+#alfredRoom .ar-module .shell main::-webkit-scrollbar-track{background:#14191e}
+#alfredRoom .ar-module .shell main::-webkit-scrollbar-thumb{background:#66747c;border:2px solid #14191e;border-radius:9px}
+
+/* iPad portrait: keep the rail on the right, never move it to the bottom. */
+@media(max-width:1000px){
+  #alfredRoom{--fox-rail-width:31.5%}
+  #alfredRoom .ar-photo-screen,
+  #alfredRoom .ar-photo-screen.ar-collapsed{
+    left:2%!important;top:8.5%!important;width:63.5%!important;height:87%!important;
+  }
+  #alfredRoom .ar-wall{right:2%!important;top:7%!important;width:var(--fox-rail-width)!important;height:10.5%!important}
+  #alfredRoom .ar-table,
+  #alfredRoom .ar-photo-screen.ar-collapsed ~ .ar-table{
+    right:2%!important;top:19%!important;bottom:auto!important;
+    width:var(--fox-rail-width)!important;height:76%!important;
+    grid-template-columns:1fr!important;grid-template-rows:repeat(9,minmax(0,1fr))!important;
+    gap:5px!important;padding:7px!important;
+  }
+  #alfredRoom .ar-table button{font-size:11px!important;padding:6px 9px!important}
+  #alfredRoom .ar-table button small{font-size:8px!important;margin-top:3px!important}
+  #alfredRoom .ar-module .shell main{padding:14px 14px calc(100px + env(safe-area-inset-bottom))!important}
+}
+
+/* iPhone: room view still shows the boxes on the right. Working pages use the full screen. */
+@media(max-width:600px){
+  #alfredRoom{background-position:58% center;--fox-rail-width:48%}
+  #alfredRoom .ar-upper{padding:10px 11px!important;width:49%;pointer-events:none}
+  #alfredRoom .ar-brand strong{font-size:22px!important;letter-spacing:.14em!important}
+  #alfredRoom .ar-brand small{font-size:7px!important;letter-spacing:.16em!important}
+  #alfredRoom .ar-location,#alfredRoom .ar-brand em{display:none!important}
+  #alfredRoom .ar-wall{right:2%!important;top:5%!important;width:var(--fox-rail-width)!important;height:10%!important}
+  #alfredRoom .ar-table,
+  #alfredRoom .ar-photo-screen.ar-collapsed ~ .ar-table{
+    right:2%!important;top:16.5%!important;bottom:auto!important;
+    width:var(--fox-rail-width)!important;height:80.5%!important;
+    grid-template-columns:1fr!important;grid-template-rows:repeat(9,minmax(0,1fr))!important;
+    gap:4px!important;padding:5px!important;
+  }
+  #alfredRoom .ar-table button{font-size:9px!important;padding:4px 7px!important}
+  #alfredRoom .ar-table button small{display:block!important;font-size:7px!important;margin-top:2px!important}
+  #alfredRoom:not(.ar-room-only) .ar-wall,
+  #alfredRoom:not(.ar-room-only) .ar-table{display:none!important}
+  #alfredRoom:not(.ar-room-only) .ar-photo-screen,
+  #alfredRoom:not(.ar-room-only) .ar-photo-screen.ar-collapsed{
+    display:flex!important;left:1.5%!important;top:3.5%!important;width:97%!important;height:93%!important;
+  }
+  #alfredRoom .ar-screenhead{min-height:58px!important;padding:6px 7px!important;align-items:flex-start!important}
+  #alfredRoom .ar-screen-actions{gap:4px!important;max-width:58%!important}
+  #alfredRoom .ar-screen-actions button{font-size:7px!important;min-height:30px!important;padding:5px 6px!important}
+  #alfredRoom .ar-screenhead .ar-signal{font-size:7px!important;letter-spacing:.08em!important}
+  #alfredRoom .ar-screenhead strong{font-size:10px!important;letter-spacing:.05em!important}
+  #alfredRoom .ar-screentail{display:none!important}
+  #alfredRoom .ar-module .shell main{padding:11px 10px calc(118px + env(safe-area-inset-bottom))!important}
+}
+
+/* FOX COMPACT WORKSPACE — the room remains the hero; EXPAND restores full work mode. */
+#alfredRoom .ar-wall .ar-wall-title{
+  display:flex!important;
+  align-items:baseline!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+  min-width:0!important;
+  margin:6px 0 5px!important;
+  font-size:clamp(12px,1.08vw,18px)!important;
+}
+#alfredRoom .ar-wall .ar-wall-title>span{min-width:0;white-space:nowrap}
+#alfredRoom .ar-wall .ar-local-date{
+  flex:none;
+  color:#e5c79a;
+  font-size:clamp(7px,.63vw,10px);
+  font-weight:700;
+  letter-spacing:.075em;
+  line-height:1.15;
+  white-space:nowrap;
+  text-shadow:0 2px 10px #000;
+}
+@media(min-width:1001px){
+  #alfredRoom:not(.ar-room-only):not(.ar-focus) .ar-photo-screen,
+  #alfredRoom:not(.ar-room-only):not(.ar-focus) .ar-photo-screen.ar-collapsed{
+    left:3%!important;
+    top:20%!important;
+    width:50%!important;
+    height:59%!important;
+  }
+  #alfredRoom:not(.ar-focus) .ar-module .grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(min-width:601px) and (max-width:1000px){
+  #alfredRoom:not(.ar-room-only):not(.ar-focus) .ar-photo-screen,
+  #alfredRoom:not(.ar-room-only):not(.ar-focus) .ar-photo-screen.ar-collapsed{
+    left:2.5%!important;
+    top:18%!important;
+    width:55%!important;
+    height:64%!important;
+  }
+  #alfredRoom .ar-wall .ar-wall-title{gap:5px!important;font-size:11px!important}
+  #alfredRoom .ar-wall .ar-local-date{font-size:7px!important;letter-spacing:.035em!important}
+  #alfredRoom:not(.ar-focus) .ar-module .grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:600px){
+  #alfredRoom .ar-wall .ar-wall-title{margin:2px 0!important;gap:4px!important;font-size:9px!important}
+  #alfredRoom .ar-wall .ar-local-date{font-size:6px!important;letter-spacing:.02em!important}
+}
+
+/* FOX HOLOGRAPHIC COMMAND RAIL — transparent architectural glass with shift neon retained. */
+#alfredRoom{
+  --fox-holo-edge:rgba(139,220,237,.54);
+  --fox-holo-fill:rgba(8,20,27,.34);
+  --fox-holo-fill-deep:rgba(5,13,18,.48);
+}
+#alfredRoom .ar-wall{
+  position:absolute!important;
+  overflow:hidden!important;
+  background:
+    linear-gradient(145deg,rgba(11,27,35,.48),rgba(5,14,19,.24))!important;
+  border:1px solid rgba(148,221,236,.55)!important;
+  border-radius:8px!important;
+  -webkit-backdrop-filter:blur(12px) saturate(1.25)!important;
+  backdrop-filter:blur(12px) saturate(1.25)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(237,250,252,.24),
+    inset 0 0 28px rgba(45,199,226,.08),
+    0 12px 34px rgba(0,0,0,.46),
+    0 0 18px rgba(72,196,220,.08)!important;
+}
+#alfredRoom .ar-wall::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(112deg,transparent 0 35%,rgba(210,247,253,.10) 45%,transparent 55%),
+    repeating-linear-gradient(180deg,rgba(121,221,239,.035) 0 1px,transparent 1px 5px);
+  opacity:.72;
+}
+#alfredRoom .ar-wall>*{position:relative;z-index:1}
+#alfredRoom .ar-table,
+#alfredRoom .ar-photo-screen.ar-collapsed ~ .ar-table{
+  isolation:isolate!important;
+  overflow:hidden!important;
+  border:1px solid rgba(128,206,224,.40)!important;
+  background:
+    linear-gradient(155deg,rgba(12,27,35,.30),rgba(5,13,18,.18))!important;
+  -webkit-backdrop-filter:blur(7px) saturate(1.30)!important;
+  backdrop-filter:blur(7px) saturate(1.30)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(239,251,253,.18),
+    inset 0 0 34px rgba(38,184,213,.055),
+    0 15px 38px rgba(0,0,0,.42),
+    0 0 22px rgba(59,194,220,.07)!important;
+}
+#alfredRoom .ar-table::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(116deg,transparent 0 38%,rgba(192,243,252,.075) 49%,transparent 60%),
+    repeating-linear-gradient(180deg,rgba(95,207,229,.025) 0 1px,transparent 1px 6px);
+  opacity:.9;
+}
+#alfredRoom .ar-table button{
+  position:relative!important;
+  z-index:1!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  background:
+    linear-gradient(142deg,rgba(24,45,55,.43),rgba(7,17,23,.28))!important;
+  border:1px solid rgba(142,205,219,.36)!important;
+  color:#edf8fa!important;
+  -webkit-backdrop-filter:blur(8px) saturate(1.30)!important;
+  backdrop-filter:blur(8px) saturate(1.30)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(245,253,255,.20),
+    inset 0 -18px 30px rgba(0,0,0,.13),
+    0 4px 12px rgba(0,0,0,.34),
+    0 0 0 1px rgba(0,0,0,.15)!important;
+  text-shadow:0 1px 7px rgba(0,0,0,.92),0 0 10px rgba(151,228,242,.08)!important;
+}
+#alfredRoom .ar-table button::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    linear-gradient(110deg,transparent 0 38%,rgba(213,248,253,.11) 48%,transparent 58%),
+    linear-gradient(180deg,rgba(255,255,255,.055),transparent 38%);
+  opacity:.65;
+  transform:translateX(-18%);
+  transition:opacity .2s ease,transform .3s ease;
+}
+#alfredRoom .ar-table button::after{
+  content:"";
+  position:absolute;
+  left:0;
+  top:18%;
+  bottom:18%;
+  width:2px;
+  border-radius:2px;
+  background:linear-gradient(180deg,transparent,rgba(142,222,238,.72),transparent);
+  box-shadow:0 0 9px rgba(91,209,232,.32);
+  opacity:.72;
+}
+#alfredRoom .ar-table button:hover,
+#alfredRoom .ar-table button:focus-visible,
+#alfredRoom .ar-table button.active:not(.ar-shift2):not(.ar-shift4){
+  background:linear-gradient(142deg,rgba(38,66,78,.58),rgba(10,25,33,.42))!important;
+  border-color:rgba(225,193,146,.78)!important;
+  color:#fff2dc!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.25),
+    inset 0 0 24px rgba(222,183,127,.08),
+    0 5px 15px rgba(0,0,0,.42),
+    0 0 15px rgba(226,190,137,.12)!important;
+}
+#alfredRoom .ar-table button:hover::before,
+#alfredRoom .ar-table button:focus-visible::before,
+#alfredRoom .ar-table button.active::before{opacity:1;transform:translateX(8%)}
+#alfredRoom .ar-table button.ar-shift2{
+  background:linear-gradient(142deg,rgba(7,58,71,.53),rgba(3,25,33,.30))!important;
+  border-color:rgba(50,212,236,.86)!important;
+  color:#9cf2ff!important;
+  box-shadow:
+    inset 3px 0 0 var(--fox-shift-two),
+    inset 0 0 24px rgba(50,212,236,.13),
+    0 4px 12px rgba(0,0,0,.35),
+    0 0 15px rgba(50,212,236,.19)!important;
+  text-shadow:0 0 10px rgba(50,212,236,.44),0 1px 6px rgba(0,0,0,.95)!important;
+}
+#alfredRoom .ar-table button.ar-shift2::after{
+  background:linear-gradient(180deg,transparent,var(--fox-shift-two),transparent);
+  box-shadow:0 0 12px var(--fox-shift-two);
+  opacity:1;
+}
+#alfredRoom .ar-table button.ar-shift2 small{color:#a8effa!important;text-shadow:0 0 7px rgba(50,212,236,.32)!important}
+#alfredRoom .ar-table button.ar-shift4{
+  background:linear-gradient(142deg,rgba(73,84,93,.48),rgba(18,25,30,.29))!important;
+  border-color:rgba(210,219,226,.86)!important;
+  color:#f2f7fa!important;
+  box-shadow:
+    inset 3px 0 0 var(--fox-shift-four),
+    inset 0 0 24px rgba(210,219,226,.13),
+    0 4px 12px rgba(0,0,0,.35),
+    0 0 15px rgba(210,219,226,.16)!important;
+  text-shadow:0 0 10px rgba(210,219,226,.38),0 1px 6px rgba(0,0,0,.95)!important;
+}
+#alfredRoom .ar-table button.ar-shift4::after{
+  background:linear-gradient(180deg,transparent,var(--fox-shift-four),transparent);
+  box-shadow:0 0 12px var(--fox-shift-four);
+  opacity:1;
+}
+#alfredRoom .ar-table button.ar-shift4 small{color:#dbe4ea!important;text-shadow:0 0 7px rgba(210,219,226,.26)!important}
+#alfredRoom .ar-table button.ar-shift2.active{
+  background:linear-gradient(142deg,rgba(10,86,103,.66),rgba(4,34,43,.43))!important;
+  border-color:#75e8f8!important;
+  box-shadow:inset 3px 0 #75e8f8,inset 0 0 28px rgba(50,212,236,.21),0 0 19px rgba(50,212,236,.29)!important;
+}
+#alfredRoom .ar-table button.ar-shift4.active{
+  background:linear-gradient(142deg,rgba(103,116,126,.62),rgba(30,39,46,.42))!important;
+  border-color:#f0f5f8!important;
+  box-shadow:inset 3px 0 #eef4f7,inset 0 0 28px rgba(210,219,226,.20),0 0 18px rgba(210,219,226,.25)!important;
+}
+@media(max-width:600px){
+  #alfredRoom .ar-table,
+  #alfredRoom .ar-wall{
+    -webkit-backdrop-filter:blur(6px) saturate(1.2)!important;
+    backdrop-filter:blur(6px) saturate(1.2)!important;
+  }
+  #alfredRoom .ar-table button{
+    -webkit-backdrop-filter:blur(5px) saturate(1.2)!important;
+    backdrop-filter:blur(5px) saturate(1.2)!important;
+  }
+}
+
+/* Keep the 1195/date status monitor visible in iPhone room view. */
+@media(max-width:520px){
+  #alfredRoom.ar-room-only .ar-wall{
+    display:flex!important;
+    right:2%!important;
+    top:2.8%!important;
+    width:52%!important;
+    height:12.2%!important;
+    padding:5px 6px!important;
+  }
+  #alfredRoom.ar-room-only .ar-wall .ar-wall-title{
+    display:flex!important;
+    align-items:baseline!important;
+    justify-content:space-between!important;
+    gap:3px!important;
+    margin:1px 0 3px!important;
+    font-size:8px!important;
+    letter-spacing:.06em!important;
+  }
+  #alfredRoom.ar-room-only .ar-wall .ar-wall-title>span{font-size:8px!important}
+  #alfredRoom.ar-room-only .ar-wall .ar-local-date{
+    display:inline!important;
+    font-size:5.5px!important;
+    letter-spacing:.005em!important;
+  }
+  #alfredRoom.ar-room-only .ar-wall .ar-stats{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:3px!important;
+    margin:0!important;
+  }
+  #alfredRoom.ar-room-only .ar-wall .ar-shift-readout{
+    min-height:27px!important;
+    padding:3px 2px!important;
+    font-size:6.5px!important;
+  }
+  #alfredRoom.ar-room-only .ar-wall .ar-shift-readout span{font-size:6.5px!important}
+  #alfredRoom.ar-room-only .ar-table,
+  #alfredRoom.ar-room-only .ar-photo-screen.ar-collapsed ~ .ar-table{
+    top:16.2%!important;
+    height:81.2%!important;
+  }
+}
+@media(max-width:520px){
+  #alfredRoom.ar-room-only .ar-wall{top:2.2%!important;height:8.8%!important}
+  #alfredRoom.ar-room-only .ar-table,
+  #alfredRoom.ar-room-only .ar-photo-screen.ar-collapsed ~ .ar-table{top:12.3%!important;height:85.2%!important}
+}
+
+/* FOX 3.3 — final scroll assurance for every opened workspace and overlay. */
+#alfredRoom .ar-photo-screen,
+#alfredRoom .ar-worksurface,
+#alfredRoom .ar-module,
+#alfredRoom .ar-module .shell{
+  min-block-size:0!important;
+  min-height:0!important;
+}
+#alfredRoom .ar-module .shell main{
+  block-size:100%!important;
+  height:100%!important;
+  max-block-size:100%!important;
+  max-height:100%!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior-y:contain!important;
+  touch-action:pan-y pinch-zoom!important;
+  scrollbar-width:thin!important;
+  scrollbar-color:rgba(111,205,224,.72) rgba(7,15,20,.62)!important;
+}
+#alfredRoom .ar-module .shell main:focus-visible{
+  outline:1px solid rgba(93,218,239,.68)!important;
+  outline-offset:-2px!important;
+}
+#alfredRoom .ar-module .page,
+#alfredRoom .ar-module .page.active{
+  height:auto!important;
+  min-height:0!important;
+  overflow:visible!important;
+}
+#alfredRoom .ar-module .tablewrap{
+  max-width:100%!important;
+  overflow-x:auto!important;
+  overflow-y:visible!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior-inline:contain!important;
+}
+#alfredRoom .ar-finder-results,
+#alfredRoom .fox-choice-results,
+#alfredRoom .arc-delete-backdrop,
+#alfredRoom .arc-delete-dialog{
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior:contain!important;
+}
+#alfredRoom .ar-finder-results,
+#alfredRoom .fox-choice-results,
+#alfredRoom .arc-delete-dialog{
+  overflow-y:auto!important;
+  scrollbar-width:thin!important;
+  scrollbar-color:rgba(111,205,224,.72) rgba(7,15,20,.62)!important;
+}
+#alfredRoom .ar-module .shell main::-webkit-scrollbar,
+#alfredRoom .ar-finder-results::-webkit-scrollbar,
+#alfredRoom .fox-choice-results::-webkit-scrollbar,
+#alfredRoom .arc-delete-dialog::-webkit-scrollbar{width:9px;height:9px}
+#alfredRoom .ar-module .shell main::-webkit-scrollbar-track,
+#alfredRoom .ar-finder-results::-webkit-scrollbar-track,
+#alfredRoom .fox-choice-results::-webkit-scrollbar-track,
+#alfredRoom .arc-delete-dialog::-webkit-scrollbar-track{background:rgba(7,15,20,.62)}
+#alfredRoom .ar-module .shell main::-webkit-scrollbar-thumb,
+#alfredRoom .ar-finder-results::-webkit-scrollbar-thumb,
+#alfredRoom .fox-choice-results::-webkit-scrollbar-thumb,
+#alfredRoom .arc-delete-dialog::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,rgba(110,217,236,.82),rgba(99,130,143,.78));
+  border:2px solid rgba(7,15,20,.62);
+  border-radius:999px;
+}
+@media(max-width:600px){
+  #alfredRoom .ar-module .shell main{
+    padding-bottom:calc(132px + env(safe-area-inset-bottom))!important;
+    scrollbar-gutter:auto!important;
+  }
+}

@@ -1,0 +1,39 @@
+.fox-launch {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background: #030810;
+  color: #eaf6ff;
+}
+.fox-launch::backdrop { background: #030810; }
+.fox-launch-film {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.fox-launch-skip {
+  position: absolute;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid #77a6b7;
+  border-radius: 8px;
+  background: #07131c;
+  color: #eaf6ff;
+  font: 600 13px/1.2 system-ui, sans-serif;
+}
+.fox-launch-skip:hover { background: #102734; }
+.fox-launch-skip:focus-visible { outline: 2px solid #b6ecfa; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .fox-launch { display: none; }
+}

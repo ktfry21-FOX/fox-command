@@ -1,0 +1,20 @@
+[
+  {"id":"fy27-lead-01","category":"SHE-Q","expectation":"Achieve 100% on-time completion of SHEQ training by shift.","target":"100% on time","scope":"Shift"},
+  {"id":"fy27-lead-02","category":"SHE-Q","expectation":"Create, review, or update a minimum of 2 Safe Work Practices (SWPs).","target":"2 SWPs minimum","scope":"Individual"},
+  {"id":"fy27-lead-03","category":"SHE-Q","expectation":"Participate in a minimum of 6 SHE meetings.","target":"6 SHE meetings minimum","scope":"Individual"},
+  {"id":"fy27-lead-04","category":"SHE-Q","expectation":"Achieve 90% LSSW completion by shift.","target":"90%","scope":"Shift"},
+  {"id":"fy27-lead-05","category":"SHE-Q","expectation":"Achieve 97% Q Check completion by shift.","target":"97%","scope":"Shift"},
+  {"id":"fy27-lead-06","category":"SHE-Q","expectation":"Achieve 100% monthly SHE participation by shift.","target":"100% monthly","scope":"Shift"},
+  {"id":"fy27-lead-07","category":"Leadership","expectation":"Demonstrate evidence of SMART Playcalls and actions driven from DMS.","target":"Evidence of SMART Playcalls and DMS-driven actions","scope":"Individual"},
+  {"id":"fy27-lead-08","category":"Leadership","expectation":"Validate completion of Playcalls and actions driven from DMS.","target":"Validated completion","scope":"Individual"},
+  {"id":"fy27-lead-09","category":"Engagement","expectation":"Provide operational support outside daily operations, including EDS meetings, project work, overtime support, and area/line improvements.","target":"Evidence of operational support","scope":"Individual"},
+  {"id":"fy27-lead-10","category":"Lean","expectation":"Achieve 97% 5S compliance by shift.","target":"97%","scope":"Shift"},
+  {"id":"fy27-lead-11","category":"Lean","expectation":"Achieve 97% Centerline (CL) compliance by shift.","target":"97%","scope":"Shift"},
+  {"id":"fy27-lead-12","category":"Lean","expectation":"Achieve 97% CIL compliance by shift.","target":"97%","scope":"Shift"},
+  {"id":"fy27-lead-13","category":"Lean","expectation":"Attend a minimum of 1 RIP meeting.","target":"1 RIP meeting minimum","scope":"Individual"},
+  {"id":"fy27-lead-14","category":"Lean","expectation":"Participate in at least 2 problem-solving, Kaizen, or loss team events.","target":"2 events minimum","scope":"Individual"},
+  {"id":"fy27-lead-15","category":"Capability","expectation":"Achieve 98% data parsing accuracy in RZ/DC.","target":"98%","scope":"Individual"},
+  {"id":"fy27-lead-16","category":"Capability","expectation":"Complete Train-the-Trainer certification.","target":"Certification complete","scope":"Individual"},
+  {"id":"fy27-lead-17","category":"Performance","expectation":"Achieve the plant OEE glidepath by shift.","target":"Plant OEE glidepath","scope":"Shift"},
+  {"id":"fy27-lead-18","category":"Performance","expectation":"Maintain bag weight below 1.25% by shift.","target":"Below 1.25%","scope":"Shift"}
+]

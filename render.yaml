@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: fox-1195
+    runtime: docker
+    plan: 0.5c-512mb
+    numInstances: 1
+    healthCheckPath: /api/health
+    disk:
+      name: fox-data
+      mountPath: /app/storage
+      sizeGB: 1
+    envVars:
+      - key: FOX_HOSTED_RELEASE
+        value: "1"
+      - key: FOX_TRUST_RENDER_EDGE
+        value: "1"
+      - key: DATABASE_PATH
+        value: /app/storage/data.db
+      - key: FOX_OWNER_EMAIL
+        sync: false
+      - key: ALFRED_SETUP_KEY_HASH
+        sync: false

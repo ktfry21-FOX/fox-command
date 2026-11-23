@@ -1,0 +1,620 @@
+/* FOX v8 layout: bottom command dock, expanded-by-default tabs, large 1195 monitor,
+   holographic Rise Up leaderboard, iPhone-first ergonomics. Loaded last; doubled id wins. */
+#alfredRoom#alfredRoom{--dock-h:76px;--dock-gap:14px;--work-bottom:calc(var(--dock-h) + var(--dock-gap) * 2 + env(safe-area-inset-bottom));--side-left:54%;--top:13%}
+
+/* ---------- Bottom command dock ---------- */
+#alfredRoom#alfredRoom .ar-table,
+#alfredRoom#alfredRoom .ar-photo-screen.ar-collapsed ~ .ar-table{
+  display:grid!important;position:absolute!important;z-index:20!important;
+  left:2%!important;right:2%!important;top:auto!important;width:auto!important;
+  bottom:calc(var(--dock-gap) + env(safe-area-inset-bottom))!important;height:var(--dock-h)!important;
+  grid-template-columns:repeat(9,minmax(0,1fr))!important;grid-template-rows:1fr!important;
+  gap:6px!important;padding:7px!important;opacity:1!important;pointer-events:auto!important;
+  transform:none!important;clip-path:none!important;overflow:hidden!important;
+  background:linear-gradient(180deg,rgba(10,28,37,.46),rgba(4,12,17,.62))!important;
+  border:1px solid rgba(139,220,237,.5)!important;border-radius:12px!important;
+  -webkit-backdrop-filter:blur(14px) saturate(1.3)!important;backdrop-filter:blur(14px) saturate(1.3)!important;
+  box-shadow:inset 0 1px 0 rgba(237,250,252,.22),0 0 22px rgba(72,196,220,.16),0 14px 34px rgba(0,0,0,.5)!important;
+}
+#alfredRoom#alfredRoom .ar-table button{
+  align-items:center!important;justify-content:center!important;text-align:center!important;
+  padding:6px 4px!important;font-size:clamp(9px,.82vw,12px)!important;border-radius:8px!important;
+  background:linear-gradient(180deg,rgba(28,58,70,.42),rgba(8,22,30,.5))!important;
+  border:1px solid rgba(139,220,237,.3)!important;color:#e6f6f8!important;
+}
+#alfredRoom#alfredRoom .ar-table button small{margin-top:3px!important;font-size:clamp(7px,.55vw,9px)!important;color:#9fcbd4!important;text-align:center!important}
+#alfredRoom#alfredRoom .ar-table button:hover,#alfredRoom#alfredRoom .ar-table button.active:not(.ar-shift2):not(.ar-shift4){
+  border-color:#e2bd86!important;color:#ffe6c0!important;background:linear-gradient(180deg,rgba(80,66,44,.5),rgba(22,22,20,.55))!important;
+  box-shadow:inset 0 0 12px rgba(226,189,134,.2),0 0 14px rgba(226,189,134,.25)!important}
+#alfredRoom#alfredRoom .ar-table button.ar-shift2{border-color:#2fd3ea!important;color:#8ff0fc!important;box-shadow:inset 0 -3px 0 #32d4ec,0 0 10px rgba(50,212,236,.2)!important}
+#alfredRoom#alfredRoom .ar-table button.ar-shift4{border-color:#c3ccd3!important;color:#eef3f6!important;box-shadow:inset 0 -3px 0 #d2dbe2,0 0 10px rgba(210,219,226,.16)!important}
+#alfredRoom#alfredRoom .ar-table button.ar-shift2.active{background:rgba(35,110,130,.55)!important}
+#alfredRoom#alfredRoom .ar-table button.ar-shift4.active{background:rgba(110,120,128,.5)!important}
+
+/* ---------- Work window ---------- */
+#alfredRoom#alfredRoom:not(.ar-room-only) .ar-photo-screen,
+#alfredRoom#alfredRoom:not(.ar-room-only) .ar-photo-screen.ar-collapsed{
+  display:flex!important;left:2%!important;width:calc(var(--side-left) - 4%)!important;
+  top:var(--top)!important;bottom:var(--work-bottom)!important;height:auto!important;
+}
+#alfredRoom#alfredRoom.ar-focus .ar-photo-screen{left:2%!important;right:2%!important;width:auto!important;top:3%!important;bottom:var(--work-bottom)!important;height:auto!important}
+#alfredRoom#alfredRoom.ar-focus .ar-table{display:grid!important;opacity:1!important;pointer-events:auto!important}
+#alfredRoom#alfredRoom.ar-focus .ar-wall,#alfredRoom#alfredRoom.ar-focus .fox-rise{display:none!important}
+#alfredRoom#alfredRoom .ar-module .shell main{padding-bottom:40px!important}
+
+/* ---------- Right side: 1195 monitor + Rise Up (room view and compact view) ---------- */
+#alfredRoom#alfredRoom .ar-wall{
+  display:flex!important;left:var(--side-left)!important;right:2%!important;width:auto!important;
+  top:var(--top)!important;height:30%!important;padding:16px 20px!important;z-index:6!important;
+}
+#alfredRoom#alfredRoom .ar-wall .ar-label{font-size:10px!important;letter-spacing:.18em!important}
+#alfredRoom#alfredRoom .ar-wall .ar-wall-title{display:flex!important;align-items:flex-start!important;justify-content:space-between!important;gap:14px!important;margin:8px 0 12px!important;font-size:clamp(22px,2.5vw,40px)!important;letter-spacing:.12em!important;line-height:1.05!important;text-shadow:0 0 18px rgba(110,220,240,.35)!important}
+#alfredRoom#alfredRoom .ar-wall .ar-wall-title>span:first-child{white-space:normal!important}
+#alfredRoom .fox-datebox{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none}
+#alfredRoom#alfredRoom .ar-wall .ar-local-date{font-size:clamp(10px,.85vw,13px)!important;letter-spacing:.08em!important}
+#alfredRoom .fox-active-shift{font:inherit;font-size:clamp(9px,.75vw,12px);font-weight:800;letter-spacing:.1em;padding:6px 10px;border-radius:999px;cursor:pointer;
+  border:1px solid rgba(226,199,154,.6);background:rgba(40,34,24,.45);color:#f0d6ac;white-space:nowrap}
+#alfredRoom .fox-active-shift.s2{border-color:#32d4ec;color:#9af2fd;background:rgba(20,90,110,.45);box-shadow:0 0 14px rgba(50,212,236,.45);animation:foxPulse 2.4s ease-in-out infinite}
+#alfredRoom .fox-active-shift.s4{border-color:#d2dbe2;color:#f1f5f8;background:rgba(90,98,106,.45);box-shadow:0 0 14px rgba(210,219,226,.35);animation:foxPulse 2.4s ease-in-out infinite}
+#alfredRoom .fox-active-shift.off{border-color:#6c7a82;color:#aebbc2}
+@keyframes foxPulse{50%{box-shadow:0 0 4px rgba(120,220,240,.15)}}
+#alfredRoom#alfredRoom .ar-wall .ar-stats{gap:10px!important}
+#alfredRoom#alfredRoom .ar-wall .ar-shift-readout{min-height:58px!important;font-size:12px!important;letter-spacing:.12em!important;background:rgba(8,22,30,.4)!important;border-radius:8px!important}
+#alfredRoom#alfredRoom .ar-wall .ar-shift-readout span{font-size:clamp(13px,1.1vw,17px)!important}
+#alfredRoom .fox-restore-quick{margin-top:10px;font:inherit;font-size:11px;font-weight:800;letter-spacing:.1em;padding:9px 12px;border-radius:8px;cursor:pointer;border:1px solid #e2bd86;background:rgba(80,62,36,.55);color:#ffe3b8}
+#alfredRoom .fox-restore-quick[hidden]{display:none}
+
+#alfredRoom .fox-rise{position:absolute;z-index:6;left:var(--side-left);right:2%;top:calc(var(--top) + 30% + 14px);bottom:var(--work-bottom);
+  display:flex;flex-direction:column;padding:14px 16px;border-radius:10px;overflow:hidden;
+  background:linear-gradient(160deg,rgba(14,48,62,.34),rgba(4,14,20,.42));border:1px solid rgba(110,228,248,.5);
+  -webkit-backdrop-filter:blur(12px) saturate(1.3);backdrop-filter:blur(12px) saturate(1.3);
+  box-shadow:inset 0 0 40px rgba(50,212,236,.1),inset 0 1px 0 rgba(237,250,252,.2),0 0 26px rgba(50,212,236,.18),0 12px 30px rgba(0,0,0,.45)}
+#alfredRoom .fox-rise::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(140,235,250,.05) 0 1px,transparent 1px 4px)}
+#alfredRoom .fox-rise-scan{position:absolute;left:0;right:0;height:40%;top:-40%;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(120,230,250,.1),transparent);animation:foxScan 6s linear infinite}
+@keyframes foxScan{to{top:110%}}
+#alfredRoom .fox-rise-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:10px;color:#8ff0fc;font-size:clamp(11px,.9vw,14px);font-weight:800;letter-spacing:.16em;text-shadow:0 0 12px rgba(50,212,236,.6)}
+#alfredRoom .fox-rise-head small{color:#e5c79a;font-size:10px;letter-spacing:.12em}
+#alfredRoom .fox-rise-list{list-style:none;margin:0;padding:0 2px 0 0;display:grid;gap:6px;overflow-y:auto;min-height:0;flex:1;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+#alfredRoom .fox-rise-empty{color:#a9c9cf;font-size:12px;letter-spacing:.04em;padding:10px 4px}
+#alfredRoom .fox-rise-row{position:relative;width:100%;display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:10px;padding:8px 12px;min-height:44px;cursor:pointer;
+  font:inherit;color:#e8f8fa;text-align:left;border-radius:7px;border:1px solid rgba(110,228,248,.22);background:rgba(6,24,32,.35);overflow:hidden;
+  opacity:0;transform:translateX(12px);animation:foxIn .5s ease forwards;animation-delay:var(--d)}
+@keyframes foxIn{to{opacity:1;transform:none}}
+#alfredRoom .fox-rise-row:hover,#alfredRoom .fox-rise-row:focus-visible{border-color:#e2bd86;background:rgba(40,40,30,.4)}
+#alfredRoom .fox-rise-bar{position:absolute;left:0;bottom:0;height:2px;width:var(--w);background:linear-gradient(90deg,#32d4ec,rgba(50,212,236,.1));box-shadow:0 0 10px #32d4ec}
+#alfredRoom .fox-rise-row.s4 .fox-rise-bar{background:linear-gradient(90deg,#d2dbe2,rgba(210,219,226,.1));box-shadow:0 0 10px #d2dbe2}
+#alfredRoom .fox-rise-row::after{content:"";position:absolute;inset:0;width:var(--w);pointer-events:none;background:linear-gradient(90deg,rgba(50,212,236,.13),transparent)}
+#alfredRoom .fox-rise-row.s4::after{background:linear-gradient(90deg,rgba(210,219,226,.1),transparent)}
+#alfredRoom .fox-rise-rank{font-size:15px;font-weight:800;color:#6fdcef;text-shadow:0 0 10px rgba(50,212,236,.7)}
+#alfredRoom li:nth-child(-n+3) .fox-rise-rank{color:#f1cf98;text-shadow:0 0 10px rgba(241,207,152,.7)}
+#alfredRoom .fox-rise-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;font-weight:650;letter-spacing:.03em}
+#alfredRoom .fox-rise-name small{display:block;font-size:9px;letter-spacing:.14em;color:#8ccfda;font-weight:700}
+#alfredRoom .fox-rise-row.s4 .fox-rise-name small{color:#c9d3d9}
+#alfredRoom .fox-rise-count{font-size:20px;font-weight:800;color:#f4fdff;text-shadow:0 0 12px rgba(120,230,250,.6)}
+#alfredRoom#alfredRoom.ar-room-only .fox-rise{display:flex}
+
+/* ---------- Shift schedule dialog ---------- */
+#alfredRoom .fox-shift-dialog{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:16px;background:rgba(0,6,10,.6)}
+#alfredRoom .fox-shift-dialog[hidden]{display:none}
+#alfredRoom .fox-sd-card{width:min(520px,100%);max-height:calc(100dvh - 32px);overflow:auto;padding:18px;border-radius:12px;background:rgba(8,24,32,.92);border:1px solid rgba(110,228,248,.55);box-shadow:0 0 30px rgba(50,212,236,.25)}
+#alfredRoom .fox-sd-top{display:flex;justify-content:space-between;align-items:center;color:#8ff0fc;font-weight:800;letter-spacing:.12em;font-size:12px}
+#alfredRoom .fox-sd-top button{font:inherit;font-size:22px;background:none;border:0;color:#e5c79a;cursor:pointer;min-width:44px;min-height:44px}
+#alfredRoom .fox-sd-help{color:#b8d3d8;font-size:12px;margin:6px 0 12px}
+#alfredRoom .fox-sd-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+#alfredRoom .fox-sd-week{grid-column:1/-1;font-size:10px;letter-spacing:.16em;color:#e5c79a;margin-top:4px}
+#alfredRoom .fox-sd-day{font:inherit;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 0;min-height:48px;border-radius:7px;cursor:pointer;border:1px solid #4d5b62;background:rgba(20,26,30,.7);color:#93a3aa}
+#alfredRoom .fox-sd-day small{font-size:8px;letter-spacing:.1em}
+#alfredRoom .fox-sd-day strong{font-size:13px}
+#alfredRoom .fox-sd-day.s2{border-color:#32d4ec;color:#9af2fd;background:rgba(20,90,110,.5)}
+#alfredRoom .fox-sd-day.s4{border-color:#d2dbe2;color:#f1f5f8;background:rgba(90,98,106,.5)}
+#alfredRoom .fox-sd-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+#alfredRoom .fox-sd-fields label{display:grid;gap:5px;font-size:10px;letter-spacing:.1em;color:#b8d3d8}
+#alfredRoom .fox-sd-fields input{font:inherit;font-size:16px;padding:8px;border-radius:7px;border:1px solid #4d6b74;background:#0b1c24;color:#e8f6f8;color-scheme:dark}
+#alfredRoom .fox-sd-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+#alfredRoom .fox-sd-actions button{font:inherit;font-size:12px;font-weight:800;letter-spacing:.08em;padding:11px 14px;min-height:44px;border-radius:8px;cursor:pointer;border:1px solid #5d7c86;background:rgba(20,40,50,.7);color:#d8eef2}
+#alfredRoom .fox-sd-actions button.primary{border-color:#e2bd86;background:rgba(90,70,40,.7);color:#ffe3b8}
+
+/* ---------- iPad / small laptop ---------- */
+@media(max-width:1000px) and (min-width:601px){
+  #alfredRoom#alfredRoom{--side-left:52%;--dock-h:70px;--top:12%}
+  #alfredRoom#alfredRoom .ar-table button small{display:none!important}
+  #alfredRoom#alfredRoom .ar-table button{font-size:10px!important}
+  #alfredRoom#alfredRoom .ar-wall{height:32%!important;padding:12px 14px!important}
+  #alfredRoom .fox-rise{top:calc(var(--top) + 32% + 12px)}
+  #alfredRoom#alfredRoom .ar-wall .ar-wall-title{flex-direction:column!important;gap:8px!important}
+  #alfredRoom .fox-datebox{flex-direction:row;align-items:center;flex-wrap:wrap}
+}
+
+/* ---------- iPhone ---------- */
+@media(max-width:600px){
+  #alfredRoom#alfredRoom{--dock-h:62px;--dock-gap:0px;--work-bottom:calc(var(--dock-h) + 6px + env(safe-area-inset-bottom))}
+  #alfredRoom#alfredRoom .ar-upper{width:100%!important;padding:calc(env(safe-area-inset-top) + 8px) 14px 0!important}
+  #alfredRoom#alfredRoom .ar-table,
+  #alfredRoom#alfredRoom .ar-photo-screen.ar-collapsed ~ .ar-table{
+    left:0!important;right:0!important;bottom:0!important;border-radius:14px 14px 0 0!important;
+    height:calc(var(--dock-h) + env(safe-area-inset-bottom))!important;
+    padding:6px 6px calc(6px + env(safe-area-inset-bottom))!important;
+    display:flex!important;gap:5px!important;overflow-x:auto!important;overflow-y:hidden!important;
+    scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+    border-left:0!important;border-right:0!important;border-bottom:0!important;
+  }
+  #alfredRoom#alfredRoom .ar-table::-webkit-scrollbar{display:none}
+  #alfredRoom#alfredRoom .ar-table button{flex:0 0 74px!important;width:74px!important;height:100%!important;font-size:9px!important;padding:4px 2px!important;scroll-snap-align:start;letter-spacing:.03em!important}
+  #alfredRoom#alfredRoom .ar-table button[data-al-page="home"]{scroll-snap-align:center}
+  #alfredRoom#alfredRoom .ar-table button small{display:none!important}
+  /* Room view: big monitor on top, Rise Up below */
+  #alfredRoom#alfredRoom .ar-wall{left:3%!important;right:3%!important;top:calc(env(safe-area-inset-top) + 64px)!important;height:auto!important;min-height:0!important;padding:12px 14px!important}
+  #alfredRoom#alfredRoom .ar-wall .ar-label{display:block!important;font-size:8px!important}
+  #alfredRoom#alfredRoom .ar-wall .ar-wall-title{display:flex!important;flex-direction:column!important;gap:8px!important;font-size:26px!important;margin:6px 0 10px!important}
+  #alfredRoom .fox-datebox{flex-direction:row;align-items:center;gap:8px;flex-wrap:wrap}
+  #alfredRoom#alfredRoom .ar-wall .ar-local-date{font-size:11px!important}
+  #alfredRoom .fox-active-shift{font-size:11px;padding:7px 11px;min-height:34px}
+  #alfredRoom#alfredRoom .ar-wall .ar-shift-readout{min-height:46px!important;font-size:10px!important}
+  #alfredRoom#alfredRoom .ar-wall .ar-shift-readout span{font-size:13px!important}
+  #alfredRoom#alfredRoom .ar-wall .ar-wall-lower{display:none!important}
+  #alfredRoom#alfredRoom .ar-wall strong{display:flex!important}
+  #alfredRoom .fox-rise{left:3%;right:3%;top:calc(var(--fox-wall-bottom,300px) + 12px);bottom:var(--work-bottom);padding:12px}
+  #alfredRoom .fox-rise-row{min-height:46px}
+  /* Work window: always full screen above the tab bar on iPhone */
+  #alfredRoom#alfredRoom:not(.ar-room-only) .ar-photo-screen,
+  #alfredRoom#alfredRoom:not(.ar-room-only) .ar-photo-screen.ar-collapsed,
+  #alfredRoom#alfredRoom.ar-focus .ar-photo-screen{
+    left:0!important;right:0!important;width:auto!important;top:env(safe-area-inset-top)!important;bottom:var(--work-bottom)!important;height:auto!important;border-radius:0 0 12px 12px!important}
+  #alfredRoom#alfredRoom:not(.ar-room-only) .ar-wall,
+  #alfredRoom#alfredRoom:not(.ar-room-only) .fox-rise{display:none!important}
+  #alfredRoom#alfredRoom:not(.ar-room-only) .ar-table{display:flex!important}
+  #alfredRoom#alfredRoom #arExpand{display:none!important}
+  #alfredRoom#alfredRoom .ar-screenhead{min-height:56px!important;padding:8px 10px!important;align-items:center!important}
+  #alfredRoom#alfredRoom .ar-screenhead strong{font-size:13px!important}
+  #alfredRoom#alfredRoom .ar-screen-actions{max-width:none!important;gap:6px!important}
+  #alfredRoom#alfredRoom .ar-screen-actions button{font-size:9px!important;min-height:40px!important;padding:6px 9px!important;border-radius:8px!important}
+  #alfredRoom#alfredRoom .ar-module .shell main{padding:12px 12px 32px!important}
+  #alfredRoom#alfredRoom .ar-module input,#alfredRoom#alfredRoom .ar-module select,#alfredRoom#alfredRoom .ar-module textarea{font-size:16px!important}
+  #alfredRoom#alfredRoom .ar-module .btn,#alfredRoom#alfredRoom .ar-module button{min-height:40px}
+}
+@media(max-width:600px) and (max-height:700px){
+  #alfredRoom#alfredRoom .ar-wall .ar-wall-title{font-size:21px!important}
+}
+@media(prefers-reduced-motion:reduce){#alfredRoom .fox-rise-row{opacity:1;transform:none;animation:none}#alfredRoom .fox-rise-scan{display:none}}
+
+/* ===== FOX v9 ===== */
+/* Rise Up leaderboard: completely transparent in Room View */
+#alfredRoom#alfredRoom.ar-room-only .fox-rise{background:transparent!important;border-color:transparent!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+#alfredRoom#alfredRoom.ar-room-only .fox-rise::before,#alfredRoom#alfredRoom.ar-room-only .fox-rise-scan{display:none!important}
+#alfredRoom#alfredRoom.ar-room-only .fox-rise-row{background:transparent!important;border-color:transparent!important;border-bottom:1px solid rgba(140,235,250,.18)!important;border-radius:0!important}
+#alfredRoom#alfredRoom.ar-room-only .fox-rise-row::after{background:transparent!important}
+#alfredRoom#alfredRoom.ar-room-only .fox-rise-head,#alfredRoom#alfredRoom.ar-room-only .fox-rise-name,#alfredRoom#alfredRoom.ar-room-only .fox-rise-count,#alfredRoom#alfredRoom.ar-room-only .fox-rise-rank{text-shadow:0 0 10px rgba(50,212,236,.75),0 2px 6px #000,0 0 2px #000!important}
+#alfredRoom .fox-rise-row{min-height:58px}
+#alfredRoom .fox-rise-name{font-size:16px}
+#alfredRoom .fox-rise-count{font-size:24px}
+
+/* Shared attendance glow: light yellow at 1, stronger golden yellow through 5, amber at 6+. */
+#alfredRoom#alfredRoom .ar-module .person-tile{border:1px solid #4a565e!important;background:linear-gradient(145deg,#262c31,#1d2226)!important;box-shadow:0 5px 14px #0004!important;filter:none!important}
+#alfredRoom#alfredRoom .ar-module .person-tile.fox-pts{
+  --point-hue:calc(54 - var(--pts) * 3);
+  --point-light:calc(91% - var(--pts) * 5%);
+  --point-ink:hsl(var(--point-hue) 96% var(--point-light));
+  border-color:var(--point-ink)!important;
+  background:linear-gradient(145deg,hsl(var(--point-hue) 31% 21%),#24231d)!important;
+  box-shadow:inset 3px 0 var(--point-ink),0 0 calc(3px + var(--pts) * 3px) hsl(var(--point-hue) 96% var(--point-light) / calc(.15 + var(--pts) * .095)),0 5px 14px #0005!important}
+#alfredRoom#alfredRoom .ar-module .person-tile.fox-pts .green{color:var(--point-ink)!important}
+#alfredRoom#alfredRoom .ar-module .person-tile.fox-pts-amber{
+  border:1px solid #ffb547!important;
+  background:linear-gradient(145deg,rgba(110,64,10,.55),#231c16)!important;
+  box-shadow:inset 4px 0 #ffb547,0 0 10px #ffb547cc,0 0 26px #ff9f1a88,0 0 48px #ff8c0055,inset 0 0 16px #ffb54744!important;
+  animation:foxAmber 2.6s ease-in-out infinite}
+#alfredRoom#alfredRoom .ar-module .person-tile.fox-pts-amber .orange{color:#ffc766!important;text-shadow:0 0 8px #ffb547}
+@keyframes foxAmber{50%{box-shadow:inset 4px 0 #ffb547,0 0 7px #ffb54799,0 0 18px #ff9f1a66,0 0 34px #ff8c0033,inset 0 0 12px #ffb54733}}
+
+/* Tasks: neon state glow — green open, purple closed, red/amber overdue */
+#alfredRoom#alfredRoom .ar-module #taskList .task-card.arc-task-open{border:1px solid #39ff9c!important;background:linear-gradient(140deg,#0d3a29,#0f2430 70%)!important;box-shadow:inset 4px 0 #39ff9c,0 0 10px #39ff9caa,0 0 26px #1fe08655!important;opacity:1!important}
+#alfredRoom#alfredRoom .ar-module #taskList .task-card.arc-task-complete{border:1px solid #b77bff!important;background:linear-gradient(140deg,#331d4d,#1e1a38 70%)!important;box-shadow:inset 4px 0 #b77bff,0 0 10px #b77bffaa,0 0 26px #9a55ff55!important;opacity:1!important}
+#alfredRoom#alfredRoom .ar-module #taskList .task-card.arc-task-overdue{border:1px solid #ff5a3c!important;background:linear-gradient(140deg,#4a1e1a,#2b1e18 70%)!important;box-shadow:inset 4px 0 #ffa23a,0 0 10px #ff5a3ccc,0 0 26px #ffa23a66!important;opacity:1!important}
+#alfredRoom#alfredRoom .ar-module .arc-task-open .arc-task-state{color:#7dffbe!important}
+#alfredRoom#alfredRoom .ar-module .arc-task-complete .arc-task-state{color:#dcb8ff!important}
+#alfredRoom#alfredRoom .ar-module .arc-task-overdue .arc-task-state{color:#ffb07a!important;border-color:#ff5a3c!important}
+#alfredRoom#alfredRoom .ar-module #taskList .arc-task-open .task-meta{color:#a9ffd2!important}
+#alfredRoom#alfredRoom .ar-module #taskList .arc-task-complete .task-meta{color:#e1c5ff!important}
+#alfredRoom#alfredRoom .ar-module #taskList .arc-task-overdue .task-meta{color:#ffc9a8!important}
+#alfredRoom#alfredRoom .ar-module #dashboardTasks .item{border-left:3px solid #39ff9c!important;box-shadow:0 0 8px #39ff9c44!important}
+#alfredRoom#alfredRoom .ar-module #dashboardTasks .item.is-overdue{border-left-color:#ff5a3c!important;box-shadow:0 0 10px #ff5a3c66!important}
+
+/* Recent coaching feed */
+#alfredRoom .fox-recent-list{display:grid;gap:7px;max-height:420px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+#alfredRoom .fox-recent-row{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;width:100%;text-align:left;font:inherit;color:#e6f2f4;padding:10px 12px;border-radius:8px;cursor:pointer;border:1px solid #42525b;background:rgba(12,26,34,.6)}
+#alfredRoom .fox-recent-row.s2{box-shadow:inset 3px 0 #32d4ec}
+#alfredRoom .fox-recent-row.s4{box-shadow:inset 3px 0 #d2dbe2}
+#alfredRoom .fox-recent-row:hover{border-color:#e2bd86}
+#alfredRoom .fox-recent-date{font-size:12px;font-weight:700;color:#e5c79a;letter-spacing:.04em}
+#alfredRoom .fox-recent-main{min-width:0;display:grid;gap:2px}
+#alfredRoom .fox-recent-main small{font-size:10px;letter-spacing:.1em;color:#8fcfdb}
+#alfredRoom .fox-recent-note{font-size:13px;color:#c9d8dc;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#alfredRoom .fox-profile-rise .fox-rise-history{border-left:3px solid #32d4ec;padding-left:10px}
+#alfredRoom .fox-profile-rise #foxProfileRiseOpen{margin-top:10px}
+@media(max-width:600px){#alfredRoom .fox-recent-row{grid-template-columns:1fr;gap:4px}#alfredRoom .fox-recent-list{max-height:360px}}
+@media(prefers-reduced-motion:reduce){#alfredRoom .person-tile.fox-pts-amber{animation:none!important}}
+
+/* ===== FOX v10 ===== */
+#alfredRoom#alfredRoom .ar-wall .fox-shift-link{font:inherit;cursor:pointer;width:100%;transition:border-color .2s,box-shadow .2s}
+#alfredRoom#alfredRoom .ar-wall .fox-shift-link.ar-shift2{color:#8ff0fc!important;border-color:#32d4ec!important}
+#alfredRoom#alfredRoom .ar-wall .fox-shift-link.ar-shift4{color:#eef3f6!important;border-color:#c3ccd3!important}
+#alfredRoom#alfredRoom .ar-wall .fox-shift-link.ar-shift2:hover,#alfredRoom#alfredRoom .ar-wall .fox-shift-link.ar-shift2:focus-visible{box-shadow:0 0 16px rgba(50,212,236,.55),inset 0 0 12px rgba(50,212,236,.2)!important}
+#alfredRoom#alfredRoom .ar-wall .fox-shift-link.ar-shift4:hover,#alfredRoom#alfredRoom .ar-wall .fox-shift-link.ar-shift4:focus-visible{box-shadow:0 0 16px rgba(210,219,226,.45),inset 0 0 12px rgba(210,219,226,.15)!important}
+#alfredRoom#alfredRoom .ar-wall .fox-shift-link:active{transform:translateY(1px)}
+
+#alfredRoom .fox-add-coach{border-color:#e2bd86!important;box-shadow:inset 3px 0 #e2bd86,0 0 14px rgba(226,189,134,.18)!important}
+#alfredRoom .fox-add-coach-title{color:#ffe3b8!important;margin-top:0}
+#alfredRoom .fox-add-coach textarea{min-height:96px}
+#alfredRoom #foxPcMsg{color:#7dffbe;margin-left:8px}
+
+#alfredRoom .fox-rise-board{background:linear-gradient(160deg,rgba(14,48,62,.45),rgba(4,14,20,.55))!important;border:1px solid rgba(110,228,248,.55)!important;box-shadow:inset 0 0 30px rgba(50,212,236,.1),0 0 22px rgba(50,212,236,.18)!important}
+#alfredRoom .fox-rise-board h2{color:#8ff0fc!important;text-shadow:0 0 12px rgba(50,212,236,.6)}
+#alfredRoom .fox-board-list{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+#alfredRoom .fox-board-empty{color:#a9c9cf;padding:6px 2px}
+#alfredRoom .fox-board-row{position:relative;overflow:hidden;width:100%;display:grid;grid-template-columns:38px minmax(0,1fr) auto;align-items:center;gap:10px;padding:10px 14px;min-height:50px;font:inherit;color:#e8f8fa;text-align:left;cursor:pointer;border-radius:8px;border:1px solid rgba(110,228,248,.25);background:rgba(6,24,32,.45)}
+#alfredRoom .fox-board-row::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w);pointer-events:none;background:linear-gradient(90deg,rgba(50,212,236,.16),transparent)}
+#alfredRoom .fox-board-row.s4::after{background:linear-gradient(90deg,rgba(210,219,226,.13),transparent)}
+#alfredRoom .fox-board-row:hover{border-color:#e2bd86}
+#alfredRoom .fox-board-rank{font-weight:800;font-size:16px;color:#6fdcef;text-shadow:0 0 10px rgba(50,212,236,.7)}
+#alfredRoom .fox-board-row.top .fox-board-rank{color:#f1cf98;text-shadow:0 0 10px rgba(241,207,152,.7)}
+#alfredRoom .fox-board-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:650;font-size:15px}
+#alfredRoom .fox-board-name small{display:block;font-size:9px;letter-spacing:.14em;color:#8ccfda;font-weight:700}
+#alfredRoom .fox-board-count{font-size:22px;font-weight:800;text-shadow:0 0 12px rgba(120,230,250,.6)}
+
+/* Room View Rise Up: smaller, dark-grey translucent box */
+#alfredRoom#alfredRoom.ar-room-only .fox-rise{
+  background:rgba(28,31,35,.58)!important;border:1px solid rgba(160,172,180,.28)!important;border-radius:10px!important;
+  -webkit-backdrop-filter:blur(6px)!important;backdrop-filter:blur(6px)!important;box-shadow:0 8px 24px rgba(0,0,0,.35)!important;
+  bottom:auto!important;height:auto!important;max-height:calc(100% - var(--top) - 30% - var(--work-bottom) - 14px);padding:10px 12px!important}
+#alfredRoom#alfredRoom.ar-room-only .fox-rise-list{flex:none}
+#alfredRoom#alfredRoom.ar-room-only .fox-rise-row{min-height:46px!important;padding:6px 10px!important}
+#alfredRoom#alfredRoom.ar-room-only .fox-rise-head{margin-bottom:6px!important}
+
+/* iPhone: tighter, easier-to-use sizing (phone only) */
+@media(max-width:600px){
+  #alfredRoom#alfredRoom{--dock-h:54px}
+  #alfredRoom#alfredRoom .ar-brand strong{font-size:18px!important}
+  #alfredRoom#alfredRoom .ar-table button{flex:0 0 62px!important;width:62px!important;font-size:8px!important;padding:3px 2px!important;border-radius:7px!important}
+  #alfredRoom#alfredRoom .ar-wall{top:calc(env(safe-area-inset-top) + 74px)!important;padding:9px 11px!important}
+  #alfredRoom#alfredRoom .ar-wall .ar-wall-title{font-size:19px!important;gap:6px!important;margin:4px 0 7px!important}
+  #alfredRoom#alfredRoom .ar-wall .ar-local-date{font-size:10px!important}
+  #alfredRoom .fox-active-shift{font-size:9px;padding:5px 9px;min-height:28px}
+  #alfredRoom#alfredRoom .ar-wall .ar-shift-readout{min-height:38px!important;font-size:9px!important;padding:4px!important}
+  #alfredRoom#alfredRoom .ar-wall .ar-shift-readout span{font-size:11px!important}
+  #alfredRoom .fox-restore-quick{font-size:10px;padding:7px 10px;margin-top:7px}
+  #alfredRoom#alfredRoom.ar-room-only .fox-rise,#alfredRoom#alfredRoom .fox-rise{left:3%!important;right:3%!important;top:calc(var(--fox-wall-bottom,260px) + 10px)!important;max-height:calc(100% - var(--fox-wall-bottom,260px) - var(--work-bottom) - 20px)!important;padding:9px 10px!important}
+  #alfredRoom .fox-rise-head{font-size:10px!important}
+  #alfredRoom#alfredRoom .fox-rise-row{min-height:40px!important;padding:5px 9px!important;gap:8px!important;grid-template-columns:26px minmax(0,1fr) auto!important}
+  #alfredRoom .fox-rise-rank{font-size:12px!important}
+  #alfredRoom .fox-rise-name{font-size:13px!important}
+  #alfredRoom .fox-rise-count{font-size:17px!important}
+  /* Work window */
+  #alfredRoom#alfredRoom .ar-screenhead{min-height:46px!important;padding:5px 8px!important}
+  #alfredRoom#alfredRoom .ar-screenhead strong{font-size:11px!important}
+  #alfredRoom#alfredRoom .ar-screenhead .ar-signal{font-size:6px!important}
+  #alfredRoom#alfredRoom .ar-screen-actions button{font-size:8px!important;min-height:34px!important;padding:4px 7px!important}
+  #alfredRoom#alfredRoom .ar-module{font-size:13px}
+  #alfredRoom#alfredRoom .ar-module .shell main{padding:9px 9px 26px!important}
+  #alfredRoom#alfredRoom .ar-module .page>h1,#alfredRoom#alfredRoom .ar-module h1{font-size:18px!important;margin:4px 0 8px!important}
+  #alfredRoom#alfredRoom .ar-module h2{font-size:14px!important}
+  #alfredRoom#alfredRoom .ar-module h3{font-size:13px!important}
+  #alfredRoom#alfredRoom .ar-module p{font-size:12.5px}
+  #alfredRoom#alfredRoom .ar-module .card{padding:10px!important;margin:8px 0!important}
+  #alfredRoom#alfredRoom .ar-module .item,#alfredRoom#alfredRoom .ar-module .history-row{padding:8px!important}
+  #alfredRoom#alfredRoom .ar-module .metric{font-size:20px!important}
+  #alfredRoom#alfredRoom .ar-module .small{font-size:10px!important}
+  #alfredRoom#alfredRoom .ar-module .grid{gap:6px!important}
+  #alfredRoom#alfredRoom .ar-module .field{margin:5px 0!important}
+  #alfredRoom#alfredRoom .ar-module label{font-size:11px!important}
+  #alfredRoom#alfredRoom .ar-module input,#alfredRoom#alfredRoom .ar-module select,#alfredRoom#alfredRoom .ar-module textarea{padding:7px 9px!important;min-height:36px}
+  #alfredRoom#alfredRoom .ar-module .fox-choice-trigger{min-height:36px!important;font-size:13px!important;padding:6px 9px!important}
+  #alfredRoom#alfredRoom .ar-module .btn,#alfredRoom#alfredRoom .ar-module button.btn{min-height:36px!important;font-size:12px!important;padding:6px 11px!important}
+  #alfredRoom#alfredRoom .ar-module .person-tile{padding:10px!important;gap:3px!important}
+  #alfredRoom#alfredRoom .ar-module .person-tile strong{font-size:14px!important}
+  #alfredRoom#alfredRoom .ar-module .task-card{padding:10px!important}
+  #alfredRoom#alfredRoom .ar-module .task-card h3{font-size:14px!important}
+  #alfredRoom#alfredRoom .ar-module .arc-task-state{font-size:10px!important;padding:4px 7px!important}
+  #alfredRoom .fox-recent-row,#alfredRoom .fox-board-row{padding:7px 9px!important;min-height:40px!important}
+  #alfredRoom .fox-board-name{font-size:13px!important}
+  #alfredRoom .fox-board-count{font-size:17px!important}
+  #alfredRoom .fox-recent-note{font-size:12px!important}
+  #alfredRoom .fox-sd-card{padding:13px}
+}
+
+/* ===== FOX v12: Room View tasks panel (mirrors the Rise Up panel, left side) ===== */
+#alfredRoom#alfredRoom:not(.ar-room-only) .fox-tasks{display:none!important}
+#alfredRoom#alfredRoom.ar-room-only .fox-rise.fox-tasks{left:2%!important;right:var(--side-left)!important}
+#alfredRoom .fox-task-row.is-open .fox-rise-rank{color:#7dffbe!important;text-shadow:0 0 10px rgba(57,255,156,.7)!important}
+#alfredRoom .fox-task-row.is-open .fox-rise-name small{color:#8ff5c0!important}
+#alfredRoom .fox-task-row.is-open .fox-rise-bar{background:linear-gradient(90deg,#39ff9c,rgba(57,255,156,.1))!important;box-shadow:0 0 10px #39ff9c!important}
+#alfredRoom .fox-task-row.is-overdue .fox-rise-rank{color:#ffb07a!important;text-shadow:0 0 10px rgba(255,90,60,.8)!important}
+#alfredRoom .fox-task-row.is-overdue .fox-rise-name small{color:#ff9d7a!important}
+#alfredRoom .fox-task-row.is-overdue .fox-rise-bar{background:linear-gradient(90deg,#ff5a3c,#ffa23a 60%,rgba(255,162,58,.1))!important;box-shadow:0 0 10px #ff5a3c!important}
+#alfredRoom .fox-task-row.is-overdue .fox-task-due{color:#ffc08a!important;text-shadow:0 0 10px rgba(255,90,60,.7)!important}
+#alfredRoom .fox-task-due{font-size:14px!important;letter-spacing:.06em;white-space:nowrap}
+#alfredRoom#alfredRoom.ar-room-only .fox-tasks .fox-rise-head{color:#9dffd0!important;text-shadow:0 0 12px rgba(57,255,156,.55),0 2px 6px #000!important}
+@media(max-width:600px){
+  #alfredRoom#alfredRoom.ar-room-only .fox-rise.fox-tasks{left:3%!important;right:3%!important;top:calc(var(--fox-rise-bottom,470px) + 10px)!important;max-height:calc(100% - var(--fox-rise-bottom,470px) - var(--work-bottom) - 20px)!important}
+  #alfredRoom .fox-task-due{font-size:12px!important}
+}
+
+/* ===== FOX v13: scrollable Room View tasks list ===== */
+#alfredRoom#alfredRoom.ar-room-only .fox-rise.fox-tasks{overflow:hidden!important}
+#alfredRoom#alfredRoom.ar-room-only .fox-tasks .fox-rise-list{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;
+  -webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y!important;padding-right:6px!important;
+  scrollbar-width:thin;scrollbar-color:rgba(57,255,156,.55) transparent}
+#alfredRoom .fox-tasks .fox-rise-list::-webkit-scrollbar{width:6px}
+#alfredRoom .fox-tasks .fox-rise-list::-webkit-scrollbar-thumb{background:rgba(57,255,156,.5);border-radius:6px}
+#alfredRoom .fox-tasks .fox-rise-list::-webkit-scrollbar-track{background:transparent}
+
+/* ===== FOX v14: official FOX emblem branding ===== */
+/* Room View brand lockup */
+#alfredRoom .ar-brand.fox-brand{display:flex!important;align-items:center;gap:clamp(10px,1.1vw,16px)}
+#alfredRoom .fox-brand-text{display:grid;gap:4px}
+#alfredRoom .fox-brand-mark{--fox-mark-size:clamp(64px,min(7vw,11dvh),120px);width:var(--fox-mark-size);height:var(--fox-mark-size);border-radius:50%;flex:none;object-fit:cover;
+  box-shadow:0 0 0 1px rgba(110,228,248,.45),0 0 18px rgba(50,212,236,.35),0 6px 18px rgba(0,0,0,.6);animation:foxEmblemGlow 5s ease-in-out infinite}
+@keyframes foxEmblemGlow{0%,100%{box-shadow:0 0 0 1px rgba(110,228,248,.45),0 0 14px rgba(50,212,236,.28),0 6px 18px rgba(0,0,0,.6)}50%{box-shadow:0 0 0 1px rgba(140,240,252,.7),0 0 26px rgba(50,212,236,.5),0 6px 18px rgba(0,0,0,.6)}}
+@media(max-width:600px){#alfredRoom .fox-brand-mark{--fox-mark-size:60px}}
+/* Sign-in screen */
+.lockbox .alfred-lock-mark{width:clamp(112px,34vw,148px)!important;height:clamp(112px,34vw,148px)!important;margin:0 auto 14px!important;border-radius:50%;object-fit:cover!important;
+  filter:none!important;box-shadow:0 0 0 1px rgba(110,228,248,.5),0 0 30px rgba(50,212,236,.38),0 12px 30px rgba(0,0,0,.65);animation:foxEmblemGlow 5s ease-in-out infinite}
+.lock{background:radial-gradient(ellipse at 50% 32%,rgba(20,70,86,.35),transparent 60%),#05090c!important}
+.lock::before{content:"";position:fixed;inset:0;pointer-events:none;background:url("./fox-emblem.webp") center 38%/min(120vw,980px) no-repeat;opacity:.05;filter:blur(1px) grayscale(.2)}
+.lockbox{position:relative;z-index:1}
+/* Sidebar brand */
+.alfred-brand img{border-radius:50%!important;object-fit:cover!important;filter:none!important;box-shadow:0 0 0 1px rgba(110,228,248,.45),0 0 12px rgba(50,212,236,.35)}
+.arc-phone .shell>aside .alfred-brand img{width:30px!important;height:30px!important}
+/* Home hero emblem (replaces the old signal) */
+#home .hero .arc-reactor-upgrade{width:min(100%,480px);aspect-ratio:auto;opacity:1}
+#home .hero .arc-reactor-upgrade img.fox-hero-emblem{width:min(100%,460px)!important;max-width:100%!important;height:auto!important;aspect-ratio:1;border-radius:50%;justify-self:center;margin:auto;
+  filter:none!important;animation:none!important;box-shadow:0 0 0 1px rgba(110,228,248,.45),0 0 40px rgba(50,212,236,.3),0 16px 36px rgba(0,0,0,.6)}
+@media(max-width:680px){#home .hero .arc-reactor-upgrade img.fox-hero-emblem{width:min(100%,88vw,405px)!important}}
+/* Static brand marks; the opening film is the only launch animation. */
+.lockbox .alfred-lock-mark,#alfredRoom .fox-brand-mark{animation:none!important}
+/* Date mark: static emblem, no spin */
+#home .home-date::before{border-radius:50%;animation:none!important}
+
+/* Technician-only stat cards and completed goals. */
+#alfredRoom#alfredRoom .ar-module #profileSummary > .grid{
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,120px),160px))!important;
+  justify-content:start;gap:8px!important
+}
+#alfredRoom#alfredRoom .ar-module #profileSummary > .grid > .item{
+  min-width:0;min-height:0;margin:0!important;padding:6px 9px!important
+}
+#alfredRoom#alfredRoom .ar-module #profileSummary > .grid .small{
+  display:block;font-size:12px;line-height:1.25
+}
+#alfredRoom#alfredRoom .ar-module #profileSummary > .grid :is(.metric,h3){
+  display:block;margin:2px 0 0!important;line-height:1.1;overflow-wrap:anywhere
+}
+#alfredRoom#alfredRoom .ar-module #profileSummary > .grid .metric{
+  font-size:21px!important;font-variant-numeric:tabular-nums
+}
+#alfredRoom#alfredRoom .ar-module #profileSummary > .grid h3{font-size:14px}
+#alfredRoom .fox-completed-goals{margin-top:14px;padding-top:11px;border-top:1px solid #526169}
+#alfredRoom .fox-completed-goals h2{margin:0 0 6px}
+#alfredRoom .fox-completed-goals ul{margin:0;padding-inline-start:20px;line-height:1.4}
+#alfredRoom .fox-completed-goals li{padding:3px 0;overflow-wrap:anywhere}
+#alfredRoom .fox-completed-goals li::marker{color:#7ce2b4}
+@media(max-width:600px){
+  #alfredRoom#alfredRoom .ar-module #profileSummary > .grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important
+  }
+}
+
+/* iPhone hardware only, including widths above 600px when rotated. */
+#alfredRoom#alfredRoom.fox-iphone{
+  --dock-h:52px;--dock-gap:0px;
+  --work-bottom:calc(var(--dock-h) + env(safe-area-inset-bottom) + 7px);
+  --phone-left:max(8px,env(safe-area-inset-left));--phone-right:max(8px,env(safe-area-inset-right))
+}
+#alfredRoom#alfredRoom.fox-iphone.ar-room-only{
+  display:grid;grid-template-columns:minmax(0,1fr);
+  grid-template-areas:"brand" "monitor" "rise" "tasks";
+  grid-template-rows:auto auto auto minmax(0,1fr);gap:6px;
+  padding:calc(env(safe-area-inset-top) + 5px) var(--phone-right) var(--work-bottom) var(--phone-left)
+}
+#alfredRoom#alfredRoom.fox-iphone.ar-room-only > :is(.ar-upper,.ar-wall,.fox-rise){
+  position:relative!important;inset:auto!important;width:auto!important;height:auto!important;
+  min-width:0;min-height:0!important;max-height:none!important;transform:none!important;margin:0!important
+}
+#alfredRoom#alfredRoom.fox-iphone.ar-room-only > .ar-upper{
+  grid-area:brand;align-self:start;padding:0!important
+}
+#alfredRoom#alfredRoom.fox-iphone .fox-brand-mark{--fox-mark-size:48px}
+#alfredRoom#alfredRoom.fox-iphone .fox-brand-text{gap:2px}
+#alfredRoom#alfredRoom.fox-iphone .ar-brand strong{font-size:20px!important}
+#alfredRoom#alfredRoom.fox-iphone :is(.ar-location,.fox-brand-text em,.ar-wall-lower,.ar-wall > .ar-label){display:none!important}
+#alfredRoom#alfredRoom.fox-iphone.ar-room-only > .ar-wall{grid-area:monitor;padding:6px 9px!important}
+#alfredRoom#alfredRoom.fox-iphone .ar-wall .ar-wall-title{
+  flex-direction:row!important;align-items:center!important;justify-content:center!important;
+  flex-wrap:wrap;gap:2px 9px!important;margin:0 0 4px!important;font-size:13px!important;letter-spacing:.07em!important
+}
+#alfredRoom#alfredRoom.fox-iphone .ar-wall .ar-wall-title > span:first-child{font-size:inherit!important}
+#alfredRoom#alfredRoom.fox-iphone .fox-datebox{flex-direction:row;align-items:center;flex-wrap:wrap;justify-content:center;gap:4px}
+#alfredRoom#alfredRoom.fox-iphone .ar-wall .ar-local-date{font-size:10px!important}
+#alfredRoom#alfredRoom.fox-iphone .ar-wall .fox-active-shift{font-size:9px!important;min-height:28px;padding:3px 6px!important}
+#alfredRoom#alfredRoom.fox-iphone .ar-wall .ar-stats{gap:6px!important;margin:0}
+#alfredRoom#alfredRoom.fox-iphone .ar-wall .ar-shift-readout{
+  min-height:34px!important;padding:3px 7px!important;font-size:10px!important;letter-spacing:.055em!important
+}
+#alfredRoom#alfredRoom.fox-iphone .ar-wall .ar-shift-readout span{font-size:11px!important}
+#alfredRoom#alfredRoom.fox-iphone.ar-room-only > #foxRise{grid-area:rise;max-height:clamp(76px,22dvh,147px)!important}
+#alfredRoom#alfredRoom.fox-iphone.ar-room-only > #foxTasks{grid-area:tasks}
+#alfredRoom#alfredRoom.fox-iphone.ar-room-only > .fox-rise{
+  padding:5px 7px!important;align-items:stretch
+}
+#alfredRoom#alfredRoom.fox-iphone .fox-rise-head{flex:none;margin-bottom:3px!important;font-size:10px!important;letter-spacing:.075em}
+#alfredRoom#alfredRoom.fox-iphone .fox-rise-head small{font-size:9px;letter-spacing:.045em;white-space:nowrap}
+#alfredRoom#alfredRoom.fox-iphone.ar-room-only .fox-rise .fox-rise-list{
+  flex:0 1 auto!important;min-height:0;gap:3px;overflow-y:auto;overscroll-behavior:contain;
+  touch-action:pan-y;-webkit-overflow-scrolling:touch
+}
+#alfredRoom#alfredRoom.fox-iphone.ar-room-only .fox-rise-row{
+  min-height:36px!important;padding:3px 6px!important;gap:6px!important;
+  grid-template-columns:20px minmax(0,1fr) auto!important
+}
+#alfredRoom#alfredRoom.fox-iphone .fox-rise-rank{font-size:11px!important}
+#alfredRoom#alfredRoom.fox-iphone .fox-rise-name{font-size:12px!important}
+#alfredRoom#alfredRoom.fox-iphone .fox-rise-name small{font-size:9px;letter-spacing:.075em}
+#alfredRoom#alfredRoom.fox-iphone .fox-rise-count{font-size:14px!important}
+#alfredRoom#alfredRoom.fox-iphone .fox-task-due{font-size:11px!important}
+#alfredRoom#alfredRoom.fox-iphone > .ar-table{
+  left:var(--phone-left)!important;right:var(--phone-right)!important;top:auto!important;
+  bottom:env(safe-area-inset-bottom)!important;height:var(--dock-h)!important;padding:4px!important;
+  gap:4px!important;border-radius:9px!important
+}
+#alfredRoom#alfredRoom.fox-iphone .ar-table button{font-size:9px!important;padding:2px!important;letter-spacing:.025em!important}
+#alfredRoom#alfredRoom.fox-iphone .ar-table button small{display:none!important}
+#alfredRoom#alfredRoom.fox-iphone:not(.ar-room-only) > .ar-photo-screen{
+  top:env(safe-area-inset-top)!important;left:var(--phone-left)!important;right:var(--phone-right)!important;
+  width:auto!important;bottom:var(--work-bottom)!important
+}
+#alfredRoom#alfredRoom.fox-iphone .ar-screenhead{min-height:46px!important;padding:4px 7px!important}
+#alfredRoom#alfredRoom.fox-iphone .ar-screentail{display:none!important}
+#alfredRoom#alfredRoom.fox-iphone .ar-module .shell main{padding:8px 8px 20px!important}
+#alfredRoom#alfredRoom.fox-iphone .ar-module #home .fox-hero-emblem{width:min(100%,64vw,300px)!important}
+@media(orientation:landscape){
+  #alfredRoom#alfredRoom.fox-iphone.ar-room-only{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    grid-template-areas:"brand monitor" "tasks rise";grid-template-rows:auto minmax(0,1fr)
+  }
+  #alfredRoom#alfredRoom.fox-iphone.ar-room-only > .ar-upper{align-self:center}
+  #alfredRoom#alfredRoom.fox-iphone.ar-room-only > #foxRise{max-height:none!important}
+  #alfredRoom#alfredRoom.fox-iphone:not(.ar-room-only) > .ar-table,
+  #alfredRoom#alfredRoom.fox-iphone.ar-room-only > .ar-table{display:grid!important;overflow:hidden!important}
+  #alfredRoom#alfredRoom.fox-iphone .ar-table button{width:auto!important;min-width:0!important}
+  #alfredRoom#alfredRoom.fox-iphone .ar-module #home .fox-hero-emblem{width:min(100%,46dvh,250px)!important}
+}
+
+/* Room branding is larger without enlarging the workspace return control. */
+#alfredRoom#alfredRoom.ar-room-only .fox-brand{max-width:52%;gap:clamp(10px,1.6vw,23px)}
+#alfredRoom#alfredRoom.ar-room-only .fox-brand-mark{
+  --fox-mark-size:clamp(96px,min(14vw,22dvh),240px)
+}
+#alfredRoom#alfredRoom.ar-room-only .fox-brand strong{
+  font-size:clamp(46px,min(6vw,11dvh),106px)!important;letter-spacing:.17em!important
+}
+#alfredRoom#alfredRoom.ar-room-only .fox-brand-text small,
+#alfredRoom#alfredRoom.ar-room-only .fox-brand-text em{
+  font-size:clamp(13px,1.4vw,18px)!important;letter-spacing:.1em!important;line-height:1.2
+}
+#alfredRoom .fox-tab-heading{display:flex;align-items:center;gap:8px;min-width:0}
+#alfredRoom .fox-room-home{
+  display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;padding:3px;
+  border:1px solid #5295a5;border-radius:50%;background:#081b24;color:#dff9ff
+}
+#alfredRoom .fox-room-home img{display:block;width:100%;height:auto;aspect-ratio:1;border-radius:50%}
+#alfredRoom .fox-room-home:hover{border-color:#a8f1ff;box-shadow:0 0 12px #56d5ee66}
+#alfredRoom .fox-room-home:focus-visible{outline:2px solid #bcf2ff;outline-offset:2px}
+@media(max-width:600px){
+  #alfredRoom#alfredRoom.ar-room-only .fox-brand{max-width:100%}
+  #alfredRoom#alfredRoom.ar-room-only:not(.fox-iphone) .ar-wall{
+    top:calc(env(safe-area-inset-top) + 113px)!important
+  }
+  #alfredRoom#alfredRoom.ar-room-only .fox-brand-text small{font-size:14px!important}
+  #alfredRoom .fox-tab-heading{gap:6px}
+}
+#alfredRoom#alfredRoom.fox-iphone.ar-room-only .fox-brand{max-width:100%}
+#alfredRoom#alfredRoom.fox-iphone.ar-room-only .fox-brand-mark{--fox-mark-size:96px}
+#alfredRoom#alfredRoom.fox-iphone.ar-room-only .fox-brand strong{font-size:40px!important}
+#alfredRoom#alfredRoom.fox-iphone.ar-room-only .fox-brand-text small{font-size:14px!important}
+@media(orientation:landscape) and (max-height:450px){
+  #alfredRoom#alfredRoom.fox-iphone.ar-room-only .fox-brand-mark{--fox-mark-size:min(96px,24dvh)}
+}
+
+/* The embedded overview used to hide the reactor wrapper that carries the FOX emblem. */
+#alfredRoom#alfredRoom .ar-module #home .hero .reactor.arc-reactor-upgrade{
+  display:grid!important;place-items:center;align-self:center;justify-self:center;
+  width:min(100%,clamp(125px,21vw,280px));margin:0;aspect-ratio:1
+}
+#alfredRoom#alfredRoom .ar-module #home .hero .fox-hero-emblem{
+  width:100%!important;max-width:100%!important;object-fit:contain
+}
+#alfredRoom#alfredRoom .ar-module #home .fox-overview-actions{gap:7px}
+#alfredRoom#alfredRoom .ar-module #home .fox-overview-actions .btn{margin:0}
+@media(max-width:680px){
+  #alfredRoom#alfredRoom .ar-module #home .hero .reactor.arc-reactor-upgrade{
+    width:min(100%,clamp(100px,30vw,155px));grid-row:1
+  }
+}
+@media(orientation:landscape) and (max-height:450px){
+  #alfredRoom#alfredRoom.fox-iphone .ar-module #home .hero .reactor.arc-reactor-upgrade{
+    width:min(100%,42dvh,175px)
+  }
+}
+
+/* Compact workspace: Open Tasks replaces Rise Up beneath 1195 Operations. */
+.lockbox.fox-hosted-login #vaultPass{letter-spacing:normal!important;font-size:16px!important;text-align:left!important}
+.lockbox.fox-hosted-login #vaultPass::placeholder{letter-spacing:normal!important}
+#alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>#foxRise{display:none!important}
+#alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>:is(.ar-wall,#foxTasks){
+  position:relative!important;inset:auto!important;transform:none!important;
+  display:flex!important;width:auto!important;height:auto!important;min-height:0!important;
+  max-height:none!important;min-width:0;margin:0!important
+}
+#alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>.ar-wall{padding:10px 13px!important}
+#alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>.fox-rise{
+  padding:8px 10px!important;background:rgba(28,31,35,.62)!important;
+  border-color:rgba(160,172,180,.34)!important
+}
+#alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>.fox-rise .fox-rise-head{flex:none;margin-bottom:5px}
+#alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>#foxTasks .fox-rise-head{color:#9dffd0}
+#alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>.fox-rise .fox-rise-list{
+  align-content:start;overflow-x:hidden;touch-action:pan-y;
+  scrollbar-width:thin;scrollbar-color:rgba(57,255,156,.55) transparent
+}
+#alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>.fox-rise .fox-rise-row{
+  min-height:40px;padding:4px 8px;grid-template-columns:20px minmax(0,1fr) auto;
+  gap:7px;animation:none;opacity:1;transform:none
+}
+@media(min-width:601px){
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus){
+    display:grid;column-gap:0;row-gap:8px;
+    grid-template-columns:var(--side-left) minmax(0,1fr);
+    grid-template-rows:auto minmax(0,1fr);
+    padding:max(13dvh,env(safe-area-inset-top)) max(2%,env(safe-area-inset-right)) var(--work-bottom) 0
+  }
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>:is(.ar-wall,#foxTasks){
+    grid-column:2
+  }
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>.ar-wall{grid-row:1}
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>#foxTasks{grid-row:2}
+  #alfredRoom#alfredRoom.fox-iphone:not(.ar-room-only,.ar-focus)>.ar-photo-screen{
+    right:auto!important;width:calc(var(--side-left) - var(--phone-left) - 8px)!important;top:var(--top)!important
+  }
+}
+@media(min-width:601px) and (max-width:1000px){
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus){padding-top:max(12dvh,env(safe-area-inset-top))}
+}
+@media(min-width:601px) and (max-height:550px){
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus){padding-top:max(5px,env(safe-area-inset-top))}
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>.ar-wall .ar-wall-title{
+    flex-direction:row!important;flex-wrap:wrap;align-items:center!important;gap:4px!important;
+    margin:0 0 4px!important;font-size:14px!important
+  }
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>.ar-wall .fox-datebox{flex-direction:row;flex-wrap:wrap}
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>.ar-wall .ar-shift-readout{min-height:35px!important;padding:3px 6px!important}
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>.ar-wall .ar-wall-lower{display:none!important}
+}
+@media(max-width:600px){
+  #alfredRoom#alfredRoom:not(.ar-room-only) #arExpand{display:inline-flex!important;align-items:center}
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus){
+    display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto minmax(54px,17dvh);
+    gap:5px;padding:env(safe-area-inset-top) max(5px,env(safe-area-inset-right))
+      var(--work-bottom) max(5px,env(safe-area-inset-left))
+  }
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>.ar-photo-screen{
+    grid-row:1;position:relative!important;inset:auto!important;width:auto!important;
+    min-height:0!important;height:auto!important;transform:none!important
+  }
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>.ar-wall{grid-row:2;padding:5px 8px!important}
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>.ar-wall .ar-label{display:none!important}
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>.ar-wall .ar-wall-title{
+    flex-direction:row!important;align-items:center!important;flex-wrap:wrap;
+    gap:4px!important;margin:0 0 4px!important;font-size:13px!important
+  }
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>.ar-wall .ar-shift-readout{min-height:32px!important;padding:3px 6px!important}
+  #alfredRoom#alfredRoom:not(.ar-room-only,.ar-focus)>#foxTasks{grid-row:3;padding:4px 8px!important}
+}

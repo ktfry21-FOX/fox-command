@@ -1,0 +1,13 @@
+{
+  "name": "fox-private-command-center",
+  "version": "3.4.0",
+  "private": true,
+  "type": "module",
+  "description": "FOX 1195 single-owner command center",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node --no-warnings=ExperimentalWarning server.mjs --hosted"
+  }
+}

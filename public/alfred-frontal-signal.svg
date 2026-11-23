@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="266" viewBox="0 0 640 266">
+  <defs>
+    <linearGradient id="steel" x1="0" y1="0" x2=".22" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#173e57"/>
+      <stop offset=".42" stop-color="#050c15"/>
+      <stop offset=".74" stop-color="#091725"/>
+      <stop offset="1" stop-color="#02060d"/>
+    </linearGradient>
+    <linearGradient id="facet" x2=".32" y2="1">
+      <stop stop-color="#2c6988"/><stop offset=".52" stop-color="#102e45"/><stop offset="1" stop-color="#030912"/>
+    </linearGradient>
+    <linearGradient id="rim" x2=".15" y2="1">
+      <stop stop-color="#61ecff"/><stop offset=".41" stop-color="#16acdf"/><stop offset=".67" stop-color="#60e1ff"/><stop offset="1" stop-color="#078ac7"/>
+    </linearGradient>
+    <linearGradient id="center" x2="1" y2=".6">
+      <stop stop-color="#204860"/><stop offset=".51" stop-color="#050b13"/><stop offset="1" stop-color="#132c43"/>
+    </linearGradient>
+    <filter id="bloom" x="-15%" y="-30%" width="130%" height="160%">
+      <feGaussianBlur stdDeviation="5.5"/>
+    </filter>
+    <path id="wing" d="M320 237C306 175 266 142 226 144C198 145 174 158 151 179C169 155 168 133 148 115C125 93 81 86 29 126C70 68 133 27 224 15C201 31 189 52 199 67C210 83 242 91 287 94L301 44L309 72H320Z"/>
+    <g id="half">
+      <use href="#wing" fill="url(#steel)"/>
+      <path d="M29 126C78 78 135 49 224 15C181 46 157 77 148 115C124 92 81 86 29 126Z" fill="url(#facet)" stroke="#061220" stroke-width="2"/>
+      <path d="M65 95C108 64 152 43 196 27C166 44 146 65 128 96C106 92 85 92 65 95Z" fill="#26637c" opacity=".38"/>
+      <path d="M107 93L141 60L199 30M144 108L164 76L211 24M178 63L201 67M211 78L234 112L249 145M168 133L218 110L234 112L278 123" fill="none" stroke="#030913" stroke-width="2.3"/>
+      <path d="M151 179C174 147 190 136 220 132C264 126 296 160 320 237C306 175 266 142 226 144C198 145 174 158 151 179Z" fill="url(#facet)"/>
+      <path d="M33 121C79 64 143 27 224 15M151 179C173 153 204 139 230 144C274 146 306 180 320 237M29 126C76 92 120 91 148 115C168 133 169 153 151 179M224 15C202 33 190 53 200 68C213 84 244 91 287 94L301 44" fill="none" stroke="url(#rim)" stroke-width="1.65" stroke-linecap="round"/>
+      <path d="M43 108C79 73 115 53 156 35M194 71C213 85 238 91 260 92M164 165C184 148 201 145 216 144M284 169C299 186 312 212 316 226" fill="none" stroke="#a4eeff" stroke-opacity=".62" stroke-width="1.05" stroke-linecap="round"/>
+    </g>
+  </defs>
+  <g fill="none" stroke="#00afff" stroke-width="8" opacity=".75" filter="url(#bloom)">
+    <use href="#wing"/><use href="#wing" transform="translate(640 0) scale(-1 1)"/>
+  </g>
+  <use href="#half"/><use href="#half" transform="translate(640 0) scale(-1 1)"/>
+  <path d="M301 44L309 72H331L339 44L353 94L366 100L320 151L274 100L287 94Z" fill="url(#center)" stroke="#265670" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M301 44L309 72H331L339 44M274 100L320 151L366 100M320 151V234" fill="none" stroke="#55aacd" stroke-opacity=".69" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>
